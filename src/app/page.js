@@ -9,7 +9,7 @@ export const metadata = {
     description: 'Vạn Sao chuyên thiết kế website chuẩn SEO, tổ chức sự kiện tiệc cưới và chuyển dữ liệu web. Giải pháp chuyên nghiệp tại TP. Hồ Chí Minh.',
     alternates: { canonical: 'https://vansao.com' },
 }
-
+// seo
 const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
