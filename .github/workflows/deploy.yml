@@ -37,15 +37,25 @@ jobs:
           build-args: |
             WORDPRESS_API_URL=${{ secrets.WORDPRESS_API_URL }}
 
-      - name: SSH vào server và deploy
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          proxy_command: cloudflared access ssh --hostname %h
-          script: |
-            cd ~/vansao-docker
-            docker pull ghcr.io/${{ env.OWNER }}/vansao-nextjs:latest
-            docker compose up -d --no-deps nextjs
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          cat >> ~/.ssh/config << EOF
+          Host ${{ secrets.SSH_HOST }}
+            HostName ${{ secrets.SSH_HOST }}
+            User ${{ secrets.SSH_USER }}
+            IdentityFile ~/.ssh/id_ed25519
+            ProxyCommand cloudflared access ssh --hostname %h
+            StrictHostKeyChecking no
+          EOF
+
+      - name: Deploy lên server
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+            cd ~/vansao-docker &&
+            docker pull ghcr.io/${{ env.OWNER }}/vansao-nextjs:latest &&
+            docker compose up -d --no-deps nextjs &&
             docker image prune -f
+          "
