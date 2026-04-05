@@ -9,7 +9,7 @@ const navLinks = [
     { href: '/',            label: 'Trang chủ' },
     { href: '/gioi-thieu', label: 'Giới thiệu' },
     { href: '/dich-vu',    label: 'Dịch vụ' },
-    { href: '/blog',       label: 'Blog' },
+    { href: '/blog',       label: 'Bài viết' },
     { href: '/lien-he',    label: 'Liên hệ' },
 ]
 

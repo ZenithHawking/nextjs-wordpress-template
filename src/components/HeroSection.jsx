@@ -65,14 +65,15 @@ export default function HeroSection() {
                         <div className="flex flex-wrap gap-3 pt-2">
                             <Link
                                 href="https://zalo.me/0866631679"
-                                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-purple-500 px-6 py-3 text-sm font-semibold text-white shadow-lg hover:from-purple-700 hover:to-purple-600 hover:scale-105 transition-all duration-200"
+                                style={{ WebkitFontSmoothing: 'antialiased' }}
+                                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-purple-500 px-6 py-3 text-sm font-semibold text-white shadow-lg hover:from-purple-700 hover:to-purple-600 transition-all duration-200"
                             >
                                 <Sparkles size={15} />
                                 Liên hệ ngay
                             </Link>
                             <Link
-                                href="/bang-gia"
-                                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm px-6 py-3 text-sm font-semibold text-white hover:bg-white/20 hover:border-white/50 hover:scale-105 transition-all duration-200"
+                                href="/dich-vu"
+                                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm px-6 py-3 text-sm font-semibold text-white hover:bg-white/20 hover:border-white/50 transition-all duration-200"
                             >
                                 Xem bảng giá
                                 <ChevronRight size={15} />
