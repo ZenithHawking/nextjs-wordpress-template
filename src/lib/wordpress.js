@@ -60,7 +60,7 @@ export async function getServiceBySlug(slug) {
 export async function getPosts(page = 1, perPage = 9) {
     const res = await fetch(
         `${process.env.WORDPRESS_API_URL}/posts?page=${page}&per_page=${perPage}&_embed&orderby=date&order=desc`,
-        { next: { revalidate: 3600 } }
+        { next: { revalidate: 60  } }
     )
     if (!res.ok) return { posts: [], total: 0, totalPages: 0 }
     const posts = await res.json()
@@ -81,7 +81,7 @@ export async function getPostBySlug(slug) {
 export async function getCategories() {
     const res = await fetch(
         `${process.env.WORDPRESS_API_URL}/categories?per_page=20`,
-        { next: { revalidate: 3600 } }
+        { next: { revalidate: 60 } }
     )
     if (!res.ok) return []
     return res.json()
