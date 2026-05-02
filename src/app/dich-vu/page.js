@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Monitor, CalendarHeart, DatabaseZap, ArrowRight, Sparkles } from 'lucide-react'
+import { Monitor, CalendarHeart, DatabaseZap, QrCode, ArrowRight, Sparkles } from 'lucide-react'
 
 export const metadata = {
     title: 'Dịch vụ',
@@ -35,11 +35,22 @@ const services = [
         href: '/dich-vu/dich-vu-chuyen-du-lieu',
         color: 'blue',
     },
+    {
+        icon: QrCode,
+        title: 'Tạo mã QR',
+        desc: 'Tạo QR từ link web, WiFi, vCard, email, số điện thoại và văn bản. Tùy chỉnh màu sắc, logo theo ý thích.',
+        href: 'https://qr.vansao.com/',
+        color: 'warm',
+        free: true,
+        external: true,
+        linkText: 'Dùng miễn phí',
+    },
 ]
 const colorMap = {
     purple: { icon: 'bg-purple-100 text-purple-600', border: 'hover:border-purple-300', arrow: 'text-purple-500 group-hover:text-purple-700', glow: 'group-hover:shadow-purple-100' },
     yellow: { icon: 'bg-yellow-100 text-yellow-600', border: 'hover:border-yellow-300', arrow: 'text-yellow-500 group-hover:text-yellow-700', glow: 'group-hover:shadow-yellow-100' },
     blue:   { icon: 'bg-blue-100 text-blue-600',     border: 'hover:border-blue-300',   arrow: 'text-blue-500 group-hover:text-blue-700',   glow: 'group-hover:shadow-blue-100'   },
+    warm:   { icon: 'bg-[#f7f3eb] text-amber-700',   border: 'hover:border-amber-300',  arrow: 'text-amber-600 group-hover:text-amber-800', glow: 'group-hover:shadow-amber-100'  },
 }
 
 export default function ServicesPage() {
@@ -63,14 +74,22 @@ export default function ServicesPage() {
 
             {/* Cards */}
             <section className="py-24 bg-gray-50">
-                <div className="container mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {services.map(({ icon: Icon, title, desc, href, color }) => {
+                <div className="container mx-auto max-w-7xl px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {services.map(({ icon: Icon, title, desc, href, color, free, external, linkText = 'Xem chi tiết' }) => {
                         const c = colorMap[color]
                         return (
                             <div
                                 key={href}
-                                className={`group relative flex flex-col gap-6 rounded-2xl border border-gray-200 bg-white p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${c.glow} ${c.border}`}
+                                className={`group relative flex flex-col gap-6 rounded-2xl border border-gray-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${c.glow} ${c.border}`}
                             >
+                                {free && (
+                                    <div className="absolute -top-px -right-px">
+                                        <div className="bg-green-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-bl-xl rounded-tr-2xl flex items-center gap-1.5 leading-none">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-white/60 shrink-0" />
+                                            FREE
+                                        </div>
+                                    </div>
+                                )}
                                 <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${c.icon}`}>
                                     <Icon size={28} />
                                 </div>
@@ -78,13 +97,25 @@ export default function ServicesPage() {
                                     <h2 className="text-xl font-bold text-gray-900">{title}</h2>
                                     <p className="text-base text-gray-500 leading-relaxed">{desc}</p>
                                 </div>
-                                <Link
-                                    href={href}
-                                    className={`inline-flex items-center gap-2 text-base font-semibold transition-all duration-200 ${c.arrow}`}
-                                >
-                                    Xem chi tiết
-                                    <ArrowRight size={17} className="group-hover:translate-x-1 transition-transform duration-200" />
-                                </Link>
+                                {external ? (
+                                    <a
+                                        href={href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`inline-flex items-center gap-2 text-base font-semibold transition-all duration-200 ${c.arrow}`}
+                                    >
+                                        {linkText}
+                                        <ArrowRight size={17} className="group-hover:translate-x-1 transition-transform duration-200" />
+                                    </a>
+                                ) : (
+                                    <Link
+                                        href={href}
+                                        className={`inline-flex items-center gap-2 text-base font-semibold transition-all duration-200 ${c.arrow}`}
+                                    >
+                                        {linkText}
+                                        <ArrowRight size={17} className="group-hover:translate-x-1 transition-transform duration-200" />
+                                    </Link>
+                                )}
                             </div>
                         )
                     })}

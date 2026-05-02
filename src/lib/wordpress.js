@@ -57,10 +57,11 @@ export async function getServiceBySlug(slug) {
     const pages = await res.json()
     return pages[0] ?? null
 }
-export async function getPosts(page = 1, perPage = 9) {
+export async function getPosts(page = 1, perPage = 9, search = '') {
+    const q = search ? `&search=${encodeURIComponent(search)}` : ''
     const res = await fetch(
-        `${process.env.WORDPRESS_API_URL}/posts?page=${page}&per_page=${perPage}&_embed&orderby=date&order=desc`,
-        { next: { revalidate: 60  } }
+        `${process.env.WORDPRESS_API_URL}/posts?page=${page}&per_page=${perPage}&_embed&orderby=date&order=desc${q}`,
+        { next: { revalidate: search ? 30 : 60 } }
     )
     if (!res.ok) return { posts: [], total: 0, totalPages: 0 }
     const posts = await res.json()
@@ -92,8 +93,9 @@ export async function getPostsByCategory(categoryId, page = 1, perPage = 9) {
         `${process.env.WORDPRESS_API_URL}/posts?categories=${categoryId}&page=${page}&per_page=${perPage}&_embed&orderby=date&order=desc`,
         { next: { revalidate: 3600 } }
     )
-    if (!res.ok) return { posts: [], total: 0 }
+    if (!res.ok) return { posts: [], total: 0, totalPages: 0 }
     const posts = await res.json()
     const total = parseInt(res.headers.get('X-WP-Total') ?? '0')
-    return { posts, total }
+    const totalPages = parseInt(res.headers.get('X-WP-TotalPages') ?? '0')
+    return { posts, total, totalPages }
 }

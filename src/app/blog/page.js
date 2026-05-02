@@ -14,12 +14,12 @@ export const metadata = {
 }
 
 export default async function BlogPage() {
-    const [{ posts, total }, categories] = await Promise.all([
+    const [{ posts }, categories] = await Promise.all([
         getPosts(1, 100),
         getCategories(),
     ])
 
     const filteredCategories = categories.filter(c => c.slug !== 'uncategorized')
 
-    return <BlogClient posts={posts} total={total} categories={filteredCategories} />
+    return <BlogClient posts={posts} categories={filteredCategories} />
 }
