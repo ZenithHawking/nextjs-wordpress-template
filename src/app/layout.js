@@ -58,10 +58,35 @@ export const metadata = {
     },
 }
 
+const orgSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Vạn Sao',
+    url: 'https://vansao.com',
+    logo: 'https://vansao.com/logo.png',
+    telephone: '0866631679',
+    email: 'vansao.contact@gmail.com',
+    address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'TP. Hồ Chí Minh',
+        addressCountry: 'VN',
+    },
+    sameAs: [
+        'https://www.facebook.com/profile.php?id=61576379972366',
+        'https://zalo.me/0866631679',
+    ],
+    description: 'Vạn Sao chuyên thiết kế website chuẩn SEO, tổ chức sự kiện tiệc cưới và chuyển dữ liệu web tại TP. Hồ Chí Minh. Tiên phong công nghệ mới, giá cả minh bạch, bảo hành 2 năm.',
+    knowsAbout: ['Thiết kế website', 'Tổ chức sự kiện', 'Tiệc cưới', 'Chuyển dữ liệu web', 'SEO', 'Next.js'],
+}
+
 export default function RootLayout({ children }) {
   return (
       <html lang="vi">
       <body className={font.className}>
+      <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+      />
       <Header/>
       <main>{children}</main>
       <Footer />

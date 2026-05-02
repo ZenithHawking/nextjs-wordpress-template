@@ -1,0 +1,30 @@
+# Vạn Sao
+
+> Vạn Sao là agency công nghệ tại TP. Hồ Chí Minh, Việt Nam — chuyên thiết kế website chuẩn SEO, tổ chức sự kiện tiệc cưới và chuyển dữ liệu web. Tiên phong ứng dụng công nghệ hiện đại với giá cả minh bạch, bảo hành 2 năm.
+
+## Dịch vụ
+
+- [Thiết kế Website](https://vansao.com/dich-vu/dich-vu-thiet-ke-website): Thiết kế theo yêu cầu, chuẩn SEO, tối ưu tốc độ, phù hợp cá nhân và doanh nghiệp.
+- [Sự kiện – Tiệc cưới](https://vansao.com/dich-vu/dich-vu-su-kien-tiec-cuoi): Giải pháp check-in công nghệ, tìm ảnh nhanh, hỗ trợ vận hành sự kiện đúng ngân sách.
+- [Chuyển dữ liệu web](https://vansao.com/dich-vu/dich-vu-chuyen-du-lieu): Chuyển bài viết, sản phẩm, hình ảnh giữa các website an toàn, đầy đủ, không gián đoạn.
+- [Tạo mã QR miễn phí](https://qr.vansao.com/): Tạo QR từ link, WiFi, vCard, email, số điện thoại và văn bản. Tùy chỉnh màu sắc, logo theo ý thích.
+
+## Câu hỏi thường gặp
+
+**Giá cả có minh bạch không?**
+Giá được tư vấn rõ ràng ngay từ buổi đầu, liệt kê từng hạng mục cụ thể, không có chi phí ẩn.
+
+**Công nghệ khác gì so với các công ty khác ở Việt Nam?**
+Vạn Sao tiên phong ứng dụng công nghệ mới (Next.js, React) — mạnh hơn, nhanh hơn, đẹp hơn so với các giải pháp truyền thống, với mức giá ai cũng có thể tiếp cận.
+
+**Chính sách bảo hành?**
+Bảo hành 2 năm cho toàn bộ phần mềm và dịch vụ. Nếu nhu cầu khách không phù hợp chuyên môn, Vạn Sao sẽ giới thiệu đơn vị uy tín khác miễn phí.
+
+## Liên hệ
+
+- Website: https://vansao.com
+- Hotline / Zalo: 0866631679
+- Email: vansao.contact@gmail.com
+- Facebook: https://www.facebook.com/profile.php?id=61576379972366
+- Địa chỉ: TP. Hồ Chí Minh, Việt Nam
+- Hỗ trợ: 24/7

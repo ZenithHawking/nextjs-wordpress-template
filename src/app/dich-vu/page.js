@@ -53,9 +53,52 @@ const colorMap = {
     warm:   { icon: 'bg-[#f7f3eb] text-amber-700',   border: 'hover:border-amber-300',  arrow: 'text-amber-600 group-hover:text-amber-800', glow: 'group-hover:shadow-amber-100'  },
 }
 
+const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+        {
+            '@type': 'Question',
+            name: 'Giá cả của Vạn Sao có thật sự rẻ không?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Giá cả của Vạn Sao được tư vấn rõ ràng và minh bạch ngay từ buổi đầu tiên. Mọi hạng mục đều được liệt kê cụ thể, không có chi phí ẩn — để khách hàng chủ động hoàn toàn về ngân sách.',
+            },
+        },
+        {
+            '@type': 'Question',
+            name: 'Công nghệ của Vạn Sao khác gì các công ty khác tại Việt Nam?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Hầu hết các công ty tại Việt Nam hiện chỉ áp dụng công nghệ cũ và thay đổi giao diện. Những đơn vị sở hữu công nghệ hiện đại thường có giá rất cao. Vạn Sao là đơn vị tiên phong ứng dụng công nghệ mới — mạnh hơn, nhanh hơn, đẹp hơn — với mức giá phù hợp mọi đối tượng khách hàng.',
+            },
+        },
+        {
+            '@type': 'Question',
+            name: 'Tại sao nên tin tưởng và chọn dịch vụ của Vạn Sao?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Vạn Sao là những người tiên phong ứng dụng công nghệ mới tại Việt Nam: nhanh hơn, mạnh hơn và đẹp hơn so với các giải pháp truyền thống, nhưng với mức giá mà mọi khách hàng đều có thể tiếp cận được.',
+            },
+        },
+        {
+            '@type': 'Question',
+            name: 'Chính sách bảo hành của Vạn Sao như thế nào?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Vạn Sao bảo hành 2 năm cho toàn bộ phần mềm và dịch vụ. Trong quá trình tư vấn, nếu nhu cầu của khách không phù hợp với chuyên môn của chúng tôi, chúng tôi sẽ giới thiệu đơn vị uy tín đúng chuyên ngành — hoàn toàn miễn phí, không thu thêm bất kỳ khoản phí nào.',
+            },
+        },
+    ],
+}
+
 export default function ServicesPage() {
     return (
         <main>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            />
             {/* Hero */}
             <section className="py-24 bg-gray-950">
                 <div className="container mx-auto max-w-4xl px-6 text-center flex flex-col items-center gap-6">

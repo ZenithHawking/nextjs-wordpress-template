@@ -38,12 +38,15 @@ const jsonLd = {
 export default function HomePage() {
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <HeroSection />
             <ServicesSection />
             <WhyUsSection />
             <BlogSection />
             <ContactSection />
-
         </>
     )
 }
