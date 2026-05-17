@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Monitor, CalendarHeart, DatabaseZap, QrCode, ArrowRight, Sparkles } from 'lucide-react'
+import BatRadarCard from '@/components/BatRadarCard'
 
 export const metadata = {
     title: 'Dịch vụ',
@@ -162,6 +163,7 @@ export default function ServicesPage() {
                             </div>
                         )
                     })}
+                    <BatRadarCard />
                 </div>
             </section>
 

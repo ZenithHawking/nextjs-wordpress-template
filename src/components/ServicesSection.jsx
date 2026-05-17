@@ -99,8 +99,8 @@ export default function ServicesSection() {
                     <div className="inline-flex items-center gap-2 rounded-full bg-purple-100 px-5 py-2 mb-5">
                         <Sparkles size={14} className="text-purple-600" />
                         <span className="text-sm font-semibold text-purple-600 tracking-wide uppercase">
-              Dịch vụ của chúng tôi
-            </span>
+                            Dịch vụ của chúng tôi
+                        </span>
                     </div>
                     <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
                         Giải pháp toàn diện cho{' '}
@@ -120,10 +120,10 @@ export default function ServicesSection() {
                             <div
                                 key={service.href}
                                 className={`
-                  group relative flex flex-col gap-6 rounded-2xl border border-gray-200 bg-white
-                  p-10 shadow-sm transition-all duration-500 cursor-pointer
-                  hover:-translate-y-2 hover:shadow-2xl ${c.glow} ${c.border}
-                `}
+                                    group relative flex flex-col gap-6 rounded-2xl border border-gray-200 bg-white
+                                    p-10 shadow-sm transition-all duration-500 cursor-pointer
+                                    hover:-translate-y-2 hover:shadow-2xl ${c.glow} ${c.border}
+                                `}
                                 style={{
                                     opacity: cardsInView ? 1 : 0,
                                     transform: cardsInView ? 'translateY(0)' : 'translateY(40px)',
@@ -179,6 +179,7 @@ export default function ServicesSection() {
                 </div>
 
             </div>
+
         </section>
     )
 }
