@@ -52,20 +52,16 @@ jobs:
             StrictHostKeyChecking no
           EOF
 
-      - name: Copy docker-compose to server
-        env:
-          CLOUDFLARE_ACCESS_CLIENT_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
-          CLOUDFLARE_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
-        run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "mkdir -p ~/vansao-docker"
-          scp docker-compose.yml ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/vansao-docker/docker-compose.yml
-
       - name: Deploy lên server
         env:
           CLOUDFLARE_ACCESS_CLIENT_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
           CLOUDFLARE_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+            mkdir -p ~/vansao-docker &&
+            cat > ~/vansao-docker/docker-compose.yml << 'COMPOSE'
+          $(cat docker-compose.yml)
+          COMPOSE
             cd ~/vansao-docker &&
             echo 'RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}' > .env &&
             docker pull ghcr.io/${{ env.OWNER }}/vansao-nextjs:latest &&
