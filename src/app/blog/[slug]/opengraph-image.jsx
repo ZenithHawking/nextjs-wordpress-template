@@ -7,10 +7,12 @@ export const alt = 'Vạn Sao Blog'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
+export const dynamic = 'force-dynamic'
+
 export default async function OGImage({ params }) {
     const { slug } = await params
     const [post, logoData] = await Promise.all([
-        getPostBySlug(slug),
+        getPostBySlug(slug).catch(() => null),
         readFile(join(process.cwd(), 'public/logo.png')),
     ])
 
