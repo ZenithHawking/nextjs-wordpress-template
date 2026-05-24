@@ -1,16 +1,13 @@
 const DIRECTUS_URL = process.env.DIRECTUS_URL
 const DIRECTUS_TOKEN = process.env.DIRECTUS_TOKEN
 
-if (!DIRECTUS_URL) {
-    throw new Error('DIRECTUS_URL chưa được set trong .env.local')
-}
-
 const headers = {
     'Content-Type': 'application/json',
     ...(DIRECTUS_TOKEN && { Authorization: `Bearer ${DIRECTUS_TOKEN}` }),
 }
 
 async function directusFetch(path, revalidate = 3600) {
+    if (!DIRECTUS_URL) return null
     const res = await fetch(`${DIRECTUS_URL}${path}`, {
         headers,
         next: { revalidate },
