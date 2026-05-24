@@ -1,4 +1,4 @@
-import { getPosts, getCategories } from '@/lib/wordpress'
+import { getPosts, getCategories } from '@/lib/directus'
 import BlogClient from './BlogClient'
 
 export const metadata = {

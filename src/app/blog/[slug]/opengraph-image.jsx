@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 import { readFile } from 'fs/promises'
 import { join } from 'path'
-import { getPostBySlug } from '@/lib/wordpress'
+import { getPostBySlug } from '@/lib/directus'
 
 export const alt = 'Vạn Sao Blog'
 export const size = { width: 1200, height: 630 }
@@ -15,8 +15,8 @@ export default async function OGImage({ params }) {
     ])
 
     const logoBase64 = `data:image/png;base64,${logoData.toString('base64')}`
-    const title = post?.title?.rendered?.replace(/<[^>]*>/g, '') ?? 'Vạn Sao Blog'
-    const category = post?._embedded?.['wp:term']?.[0]?.[0]?.name ?? null
+    const title = post?.title ?? 'Vạn Sao Blog'
+    const category = post?.categories?.[0]?.categories_id?.name ?? null
 
     return new ImageResponse(
         (

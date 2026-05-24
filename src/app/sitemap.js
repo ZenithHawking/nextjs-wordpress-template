@@ -1,4 +1,4 @@
-import { getAllPages, getAllPosts } from '@/lib/wordpress'
+import { getAllPosts } from '@/lib/directus'
 
 export default async function sitemap() {
     const baseUrl = 'https://vansao.com'
@@ -14,11 +14,11 @@ export default async function sitemap() {
         { url: `${baseUrl}/dich-vu/dich-vu-chuyen-du-lieu`,     lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     ]
 
-    // Blog posts từ WordPress
+    // Blog posts from Directus
     const posts = await getAllPosts()
     const postRoutes = posts.map(post => ({
         url: `${baseUrl}/blog/${post.slug}`,
-        lastModified: new Date(post.modified),
+        lastModified: new Date(post.date_updated ?? post.date_created),
         changeFrequency: 'monthly',
         priority: 0.7,
     }))
