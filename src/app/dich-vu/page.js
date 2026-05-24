@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Monitor, CalendarHeart, DatabaseZap, QrCode, GraduationCap, ArrowRight, ArrowUpRight, Sparkles, Star } from 'lucide-react'
+import { Monitor, CalendarHeart, DatabaseZap, ArrowRight, ArrowUpRight, Sparkles, Star } from 'lucide-react'
 import BatRadarCard from '@/components/BatRadarCard'
+import QRCard from '@/components/QRCard'
+import UniAPICard from '@/components/UniAPICard'
 
 export const metadata = {
     title: 'Dịch vụ',
@@ -42,27 +44,6 @@ const services = [
         variant: 'mint',
         badge: null,
         num: '03',
-    },
-    {
-        icon: QrCode,
-        title: 'Tạo mã QR',
-        desc: 'Tạo QR từ link web, WiFi, vCard, email, số điện thoại và văn bản. Tùy chỉnh màu sắc, logo theo ý thích.',
-        href: 'https://qr.vansao.com/',
-        variant: 'peach',
-        badge: 'Miễn phí',
-        num: '04',
-        external: true,
-    },
-    {
-        icon: GraduationCap,
-        title: 'UniAPI',
-        desc: 'Open API tra cứu thông tin trường đại học & cao đẳng Việt Nam — tên trường, khoa, ngành học. Dành cho developer.',
-        href: 'https://school.vansao.com/',
-        variant: 'red',
-        badge: 'Open API',
-        num: '05',
-        external: true,
-        logo: '/uniapi.png',
     },
 ]
 
@@ -168,7 +149,9 @@ export default function ServicesPage() {
                                 </Link>
                             )
                         })}
+                        <QRCard />
                         <BatRadarCard />
+                        <UniAPICard />
                     </div>
                 </div>
             </section>
