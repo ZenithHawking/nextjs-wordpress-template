@@ -1,5 +1,7 @@
 import { getAllPosts } from '@/lib/directus'
 
+export const dynamic = 'force-dynamic'
+
 export default async function sitemap() {
     const baseUrl = 'https://vansao.com'
 

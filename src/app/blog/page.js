@@ -1,6 +1,8 @@
 import { getPosts, getCategories } from '@/lib/directus'
 import BlogClient from './BlogClient'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
     title: 'Blog',
     description: 'Chia sẻ kiến thức về thiết kế website, công nghệ sự kiện và giải pháp số từ Vạn Sao.',

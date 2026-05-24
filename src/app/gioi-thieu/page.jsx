@@ -8,6 +8,8 @@ import {
 import { getAllPosts } from '@/lib/directus'
 import ProcessTimeline from '@/components/ProcessTimeline'
 
+export const dynamic = 'force-dynamic'
+
 const services = [
     { icon: Monitor,       label: 'Thiết kế Website',         cls: 'yellow' },
     { icon: CalendarCheck, label: 'Checkin sự kiện',           cls: 'purple' },
