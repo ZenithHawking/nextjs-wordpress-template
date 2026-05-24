@@ -3,11 +3,13 @@ services:
     image: ghcr.io/zenithhawking/vansao-nextjs:latest
     container_name: vansao-nextjs
     restart: unless-stopped
-    ports:
-      - "3000:3000"
+    network_mode: host
     environment:
       - DIRECTUS_URL=https://api.vansao.com
       - DIRECTUS_TOKEN=vansao-admin-token-2026
       - NEXT_PUBLIC_SITE_URL=https://vansao.com
       - RESEND_API_KEY=${RESEND_API_KEY}
       - CONTACT_EMAIL=vansao.contact@gmail.com
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
