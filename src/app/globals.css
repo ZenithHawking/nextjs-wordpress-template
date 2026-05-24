@@ -1342,21 +1342,24 @@
 .vs-qr-card .cta { color: var(--vs-purple); }
 .vs-qr-card .tag { color: var(--vs-ink-4); opacity: 1; }
 
-/* UniAPI Card — green bg */
+/* UniAPI Card — light green bg */
 .vs-uniapi-card {
-  background: #15803D;
+  background: #ecfdf5; color: var(--vs-ink-1);
 }
 .vs-uniapi-card .glow {
-  background: radial-gradient(closest-side, rgba(255,255,255,0.15), transparent);
+  background: radial-gradient(closest-side, rgba(21,128,61,0.12), transparent);
 }
 .vs-uniapi-card .badge {
-  background: rgba(255,255,255,0.2); color: #fff;
+  background: #15803D; color: #fff;
 }
 .vs-uniapi-card .icon-box {
-  background: rgba(255,255,255,0.15); color: #fff;
+  background: #D1FAE5; color: #15803D;
 }
-.vs-uniapi-card .title .dot { color: #BBF7D0; }
-.vs-uniapi-card .cta { color: #BBF7D0; }
+.vs-uniapi-card .title .dot { color: #15803D; }
+.vs-uniapi-card .desc { color: var(--vs-ink-3); opacity: 1; }
+.vs-uniapi-card .cta-row { border-top-color: #D1FAE5; }
+.vs-uniapi-card .cta { color: #15803D; }
+.vs-uniapi-card .tag { color: var(--vs-ink-4); opacity: 1; }
 
 /* CTA — reuse about-cta style */
 .vs-services-cta { padding: 96px 0; background: var(--vs-bg); }
