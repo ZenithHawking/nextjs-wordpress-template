@@ -35,7 +35,8 @@ jobs:
           push: true
           tags: ghcr.io/${{ env.OWNER }}/vansao-nextjs:latest
           build-args: |
-            WORDPRESS_API_URL=${{ secrets.WORDPRESS_API_URL }}
+            DIRECTUS_URL=${{ secrets.DIRECTUS_URL }}
+            DIRECTUS_TOKEN=${{ secrets.DIRECTUS_TOKEN }}
 
       - name: Setup SSH
         run: |
