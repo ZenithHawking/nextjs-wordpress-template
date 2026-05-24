@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Sparkles, ChevronRight } from 'lucide-react'
+import { Sparkles, ArrowRight, ArrowUpRight, Monitor, CalendarHeart, DatabaseZap } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 export default function HeroSection() {
@@ -12,113 +12,103 @@ export default function HeroSection() {
     }, [])
 
     return (
-        <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-
-            {/* Background image + overlay */}
-            <div className="absolute inset-0 z-0">
-                <Image
-                    src="/banner.jpg"
-                    alt="Vạn Sao banner"
-                    fill
-                    priority
-                    className="object-cover object-center"
-                />
-                {/* Overlay làm mờ */}
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-950/80 via-gray-900/70 to-gray-950/60" />
-            </div>
-
-            {/* Content */}
-            <div className="relative z-10 container mx-auto max-w-6xl px-6 py-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-
-                    {/* Cột trái — Chữ */}
+        <section className="vs-hero" aria-labelledby="hero-h1">
+            <div className="vs-shell">
+                <div className="grid">
+                    {/* Left — content */}
                     <div
-                        className={`flex flex-col gap-6 transition-all duration-700 ${
+                        className={`transition-all duration-700 ${
                             mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                         }`}
                     >
-                        {/* Badge */}
-                        <div className="inline-flex items-center gap-2 w-fit rounded-full border border-yellow-400/40 bg-yellow-400/10 px-4 py-1.5">
-                            <Sparkles size={13} className="text-yellow-400" />
-                            <span className="text-xs font-medium text-yellow-300 tracking-wide">
-                Giải pháp chuyên nghiệp
-              </span>
-                        </div>
-
-                        {/* Tiêu đề chính */}
-                        <h1 className="text-4xl md:text-5xl font-bold leading-tight text-white drop-shadow-md">
-                            Thiết Kế Website{' '}
-                            <span className="text-yellow-400">Dịch vụ Sự kiện</span>{' '}
-                            Xử lý dữ liệu
+                        <span className="vs-eyebrow">
+                            <span className="star">★</span> Công ty công nghệ · từ 2022
+                        </span>
+                        <h1 id="hero-h1">
+                            Website, sự kiện <span className="hl">&amp; dữ liệu</span>
+                            <br />
+                            — <span className="accent">làm gọn</span>, đúng nhu cầu.
                         </h1>
-
-                        {/* Mô tả */}
-                        <p className="text-base md:text-lg text-gray-300 leading-relaxed max-w-lg"
-                           style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
-                        >
-                            Vạn Sao chuyên thiết kế website, tổ chức sự kiện và tiệc cưới trọn gói,
-                            mang đến giải pháp chuyên nghiệp giúp thương hiệu và khoảnh khắc của bạn
-                            tỏa sáng.
+                        <p className="lead">
+                            Vạn Sao giúp bạn thiết kế website, tổ chức sự kiện – tiệc cưới và chuyển dữ liệu,
+                            với báo giá rõ ràng và triển khai đúng hạn. Không công nghệ phức tạp —
+                            chỉ giải pháp gọn gàng.
                         </p>
 
-                        {/* CTA buttons */}
-                        <div className="flex flex-wrap gap-3 pt-2">
+                        <div className="actions">
                             <Link
                                 href="https://zalo.me/0866631679"
-                                style={{ WebkitFontSmoothing: 'antialiased' }}
-                                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-purple-500 px-6 py-3 text-sm font-semibold text-white shadow-lg hover:from-purple-700 hover:to-purple-600 transition-all duration-200"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-primary"
                             >
-                                <Sparkles size={15} />
-                                Liên hệ ngay
+                                <Sparkles size={14} className="star" />
+                                Tư vấn miễn phí qua Zalo
+                                <ArrowRight size={15} />
                             </Link>
-                            <Link
-                                href="/dich-vu"
-                                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm px-6 py-3 text-sm font-semibold text-white hover:bg-white/20 hover:border-white/50 transition-all duration-200"
-                            >
+                            <Link href="/dich-vu" className="btn-ghost">
                                 Xem bảng giá
-                                <ChevronRight size={15} />
+                                <ArrowUpRight size={14} />
                             </Link>
+                        </div>
+
+                        <div className="trust">
+                            <div className="avatars">
+                                <span className="av">M</span>
+                                <span className="av">L</span>
+                                <span className="av">P</span>
+                                <span className="av">H</span>
+                            </div>
+                            <span><b>100+</b> khách hàng đã chọn Vạn Sao</span>
+                            <span style={{ color: 'var(--vs-ink-4)' }}>•</span>
+                            <span className="stars-row">★★★★★ <b style={{ marginLeft: 4 }}>5.0</b></span>
                         </div>
                     </div>
 
-                    {/* Cột phải — Logo wobble */}
+                    {/* Right — Star scene */}
                     <div
-                        className={`flex items-center justify-center transition-all duration-700 delay-300 ${
+                        className={`vs-hero-scene transition-all duration-700 delay-300 ${
                             mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                         }`}
+                        aria-hidden="true"
                     >
-                        <div className="relative">
-                            {/* Vòng sáng phía sau logo */}
-                            <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-3xl scale-110" />
+                        <div className="blob" />
+                        <div className="ring ring-2" />
+                        <div className="ring ring-1" />
 
-                            {/* Logo với wobble */}
+                        {/* Big star — your /public/logo.png */}
+                        <div className="big-star">
                             <Image
                                 src="/logo.png"
-                                alt="Vạn Sao Logo"
-                                width={340}
-                                height={340}
+                                alt=""
+                                width={220}
+                                height={220}
+                                className="object-contain drop-shadow-2xl"
                                 priority
-                                className="
-                  relative object-contain drop-shadow-2xl
-                  animate-wobble
-                  hover:[animation-play-state:paused]
-                  hover:scale-110
-                  transition-transform duration-300
-                  cursor-pointer
-                "
                             />
                         </div>
-                    </div>
 
+                        <div className="orbit orbit-a">
+                            <div className="chip">
+                                <span className="ico"><Monitor size={16} /></span>
+                                Website chuẩn SEO
+                            </div>
+                        </div>
+                        <div className="orbit orbit-b">
+                            <div className="chip yellow">
+                                <span className="ico"><CalendarHeart size={16} /></span>
+                                Check-in sự kiện
+                            </div>
+                        </div>
+                        <div className="orbit orbit-c">
+                            <div className="chip mint">
+                                <span className="ico"><DatabaseZap size={16} /></span>
+                                Chuyển dữ liệu an toàn
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            {/* Scroll indicator */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-white/40">
-                <span className="text-xs tracking-widest uppercase">Cuộn xuống</span>
-                <div className="w-px h-8 bg-gradient-to-b from-white/40 to-transparent animate-pulse" />
-            </div>
-
         </section>
     )
 }
