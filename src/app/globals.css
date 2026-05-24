@@ -1262,10 +1262,13 @@
 .vs-service-card.yellow .icon-box { background: var(--vs-yellow-tint); color: var(--vs-yellow-deep); }
 .vs-service-card.mint .icon-box   { background: #E0F5EB; color: #1F5C3E; }
 .vs-service-card.peach .icon-box  { background: #FFF0E0; color: #8C3D14; }
+.vs-service-card.red .badge   { background: #FEE2E2; color: #DC2626; }
+.vs-service-card.red .icon-box { background: #FEE2E2; color: #DC2626; }
 .vs-service-card:hover.purple { border-color: var(--vs-purple-soft); }
 .vs-service-card:hover.yellow { border-color: var(--vs-yellow); }
 .vs-service-card:hover.mint   { border-color: var(--vs-mint); }
 .vs-service-card:hover.peach  { border-color: var(--vs-peach); }
+.vs-service-card:hover.red    { border-color: #F87171; }
 .vs-service-card h2 {
   font-size: 20px; font-weight: 700; color: var(--vs-ink-1); line-height: 1.3;
 }
@@ -1279,43 +1282,6 @@
   transition: gap .2s;
 }
 .vs-service-card:hover .more { gap: 10px; }
-
-/* UniAPI Card — red theme */
-.vs-uniapi-card {
-  background: #1C1017; color: #fff;
-  box-shadow: var(--vs-shadow-card);
-  transition: transform .25s, box-shadow .25s;
-  text-decoration: none;
-}
-.vs-uniapi-card:hover {
-  transform: translateY(-4px); box-shadow: var(--vs-shadow-pop);
-}
-.vs-uniapi-card .glow {
-  position: absolute; right: -80px; top: -80px;
-  width: 260px; height: 260px;
-  background: radial-gradient(closest-side, rgba(239,68,68,0.35), transparent);
-  pointer-events: none;
-}
-.vs-uniapi-card .badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  font-size: 11px; font-weight: 800; letter-spacing: 0.04em;
-  padding: 5px 12px; border-radius: 999px;
-  background: #EF4444; color: #fff;
-}
-.vs-uniapi-card .version {
-  font-size: 12px; color: rgba(255,255,255,0.4);
-}
-.vs-uniapi-card .title {
-  font-size: 24px; font-weight: 800; letter-spacing: -0.02em;
-}
-.vs-uniapi-card .title .dot { color: #EF4444; }
-.vs-uniapi-card .desc {
-  font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.7);
-}
-.vs-uniapi-card .cta {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 14px; font-weight: 600; color: #EF4444;
-}
 
 /* CTA — reuse about-cta style */
 .vs-services-cta { padding: 96px 0; background: var(--vs-bg); }

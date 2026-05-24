@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { Monitor, CalendarHeart, DatabaseZap, QrCode, ArrowRight, ArrowUpRight, Sparkles, Star } from 'lucide-react'
+import Image from 'next/image'
+import { Monitor, CalendarHeart, DatabaseZap, QrCode, GraduationCap, ArrowRight, ArrowUpRight, Sparkles, Star } from 'lucide-react'
 import BatRadarCard from '@/components/BatRadarCard'
-import UniAPICard from '@/components/UniAPICard'
 
 export const metadata = {
     title: 'Dịch vụ',
@@ -52,6 +52,17 @@ const services = [
         badge: 'Miễn phí',
         num: '04',
         external: true,
+    },
+    {
+        icon: GraduationCap,
+        title: 'UniAPI',
+        desc: 'Open API tra cứu thông tin trường đại học & cao đẳng Việt Nam — tên trường, khoa, ngành học. Dành cho developer.',
+        href: 'https://school.vansao.com/',
+        variant: 'red',
+        badge: 'Open API',
+        num: '05',
+        external: true,
+        logo: '/uniapi.png',
     },
 ]
 
@@ -122,15 +133,9 @@ export default function ServicesPage() {
             <section className="vs-services-grid-section">
                 <div className="vs-shell">
                     <div className="vs-services-grid">
-                        {services.map(({ icon: Icon, title, desc, href, variant, badge, num, external }) => (
-                            external ? (
-                                <a
-                                    key={href}
-                                    href={href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={`vs-service-card ${variant}`}
-                                >
+                        {services.map(({ icon: Icon, title, desc, href, variant, badge, num, external, logo }) => {
+                            const cardContent = (
+                                <>
                                     <span className="num-ghost">{num}</span>
                                     {badge && (
                                         <span className="badge">
@@ -139,42 +144,31 @@ export default function ServicesPage() {
                                         </span>
                                     )}
                                     <div className="icon-box">
-                                        <Icon size={28} strokeWidth={1.7} />
+                                        {logo ? (
+                                            <Image src={logo} alt={title} width={32} height={32} className="object-contain" />
+                                        ) : (
+                                            <Icon size={28} strokeWidth={1.7} />
+                                        )}
                                     </div>
                                     <h2>{title}</h2>
                                     <p>{desc}</p>
                                     <span className="more">
-                                        Dùng miễn phí
-                                        <ArrowUpRight size={15} />
+                                        {external ? 'Truy cập ngay' : 'Xem chi tiết'}
+                                        {external ? <ArrowUpRight size={15} /> : <ArrowRight size={15} />}
                                     </span>
+                                </>
+                            )
+                            return external ? (
+                                <a key={href} href={href} target="_blank" rel="noopener noreferrer" className={`vs-service-card ${variant}`}>
+                                    {cardContent}
                                 </a>
                             ) : (
-                                <Link
-                                    key={href}
-                                    href={href}
-                                    className={`vs-service-card ${variant}`}
-                                >
-                                    <span className="num-ghost">{num}</span>
-                                    {badge && (
-                                        <span className="badge">
-                                            <Star size={11} fill="currentColor" />
-                                            {badge}
-                                        </span>
-                                    )}
-                                    <div className="icon-box">
-                                        <Icon size={28} strokeWidth={1.7} />
-                                    </div>
-                                    <h2>{title}</h2>
-                                    <p>{desc}</p>
-                                    <span className="more">
-                                        Xem chi tiết
-                                        <ArrowRight size={15} />
-                                    </span>
+                                <Link key={href} href={href} className={`vs-service-card ${variant}`}>
+                                    {cardContent}
                                 </Link>
                             )
-                        ))}
+                        })}
                         <BatRadarCard />
-                        <UniAPICard />
                     </div>
                 </div>
             </section>
