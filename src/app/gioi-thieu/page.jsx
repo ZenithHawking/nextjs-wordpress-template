@@ -78,7 +78,7 @@ export default function AboutPage() {
                                     alt="Vạn Sao"
                                     width={280}
                                     height={280}
-                                    className="object-contain"
+                                    className="object-contain animate-wobble"
                                     priority
                                 />
                             </div>
