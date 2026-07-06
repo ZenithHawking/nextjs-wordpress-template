@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowLeft, ArrowRight, Calendar, Clock, Share2, ChevronRight, Sparkles } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Calendar, Clock, Share2, ChevronRight } from 'lucide-react'
 import { getPostBySlug, getLatestPosts } from '@/lib/directus'
 import { notFound } from 'next/navigation'
 
@@ -191,7 +191,6 @@ export default async function BlogPostPage({ params }) {
                             <p>Đội ngũ Vạn Sao sẵn sàng hỗ trợ bạn miễn phí.</p>
                             <div className="actions">
                                 <Link href="/lien-he" className="btn-primary">
-                                    <Sparkles size={14} className="star" />
                                     Liên hệ ngay
                                 </Link>
                                 <Link href="/blog" className="btn-ghost">

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Phone, MapPin, Send, MessageCircle, Clock, Sparkles, Star } from 'lucide-react'
+import { Phone, MapPin, Send, MessageCircle, Clock, Star } from 'lucide-react'
 
 function FacebookIcon() {
     return (
@@ -53,12 +53,8 @@ export default function ContactClient() {
             {/* Hero */}
             <section className="vs-contact-hero">
                 <div className="vs-shell">
-                    <span className="vs-eyebrow yellow">
-                        <MessageCircle size={13} />
-                        Liên hệ với Vạn Sao
-                    </span>
                     <h1>
-                        Bắt đầu dự án cùng <span className="hl-yellow">SAO</span>.
+                        Bắt đầu dự án cùng SAO
                     </h1>
                     <p className="lead">
                         Để lại thông tin, Sao sẽ liên hệ tư vấn miễn phí trong vòng 24 giờ.

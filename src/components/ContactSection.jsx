@@ -35,12 +35,8 @@ export default function ContactSection() {
 
                     {/* Left — info */}
                     <div className="left">
-                        <span className="vs-eyebrow">
-                            <Sparkles size={13} className="text-vs-purple" />
-                            Liên hệ · Tư vấn miễn phí
-                        </span>
                         <h2 id="contact-h2">
-                            Bắt đầu dự án cùng <span className="accent">Vạn Sao</span> nào!
+                            Bắt đầu dự án cùng Vạn Sao nào!
                         </h2>
                         <p className="desc">
                             Để lại thông tin, Vạn Sao sẽ liên hệ tư vấn miễn phí trong vòng 24 giờ.
@@ -167,7 +163,6 @@ export default function ContactSection() {
                                     </>
                                 ) : (
                                     <>
-                                        <Sparkles size={12} className="star" />
                                         Gửi liên hệ
                                         <ArrowRight size={14} />
                                     </>

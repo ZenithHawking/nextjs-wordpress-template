@@ -3,9 +3,8 @@ import Link from 'next/link'
 import {
     Monitor, CalendarCheck, DatabaseZap, ScanSearch,
     Megaphone, Headset, Star, CheckCircle2, Users,
-    ArrowRight, Sparkles
+    ArrowRight
 } from 'lucide-react'
-import { getAllPosts } from '@/lib/directus'
 import ProcessTimeline from '@/components/ProcessTimeline'
 
 export const dynamic = 'force-dynamic'
@@ -38,33 +37,19 @@ export const metadata = {
     },
 }
 
-export default async function AboutPage() {
-    const posts = await getAllPosts()
-    const postCount = posts.length
-
-    const stats = [
-        { value: '100+',         label: 'Doanh nghiệp hợp tác' },
-        { value: '1000+',        label: 'Sự tin tưởng khách hàng' },
-        { value: `${postCount}`, label: 'Bài viết & chia sẻ' },
-        { value: '5 ★',          label: 'Chuẩn 5 sao' },
-    ]
-
+export default function AboutPage() {
     return (
         <main>
 
             {/* Hero — editorial light, đồng bộ với homepage */}
             <section className="vs-about-hero">
+                <div className="hero-bg" aria-hidden="true" />
+                <div className="hero-cloud" aria-hidden="true" />
                 <div className="vs-shell">
                     <div className="grid">
                         <div className="left">
-                            <span className="vs-eyebrow yellow">
-                                <Sparkles size={13} />
-                                Hệ sinh thái của SAO
-                            </span>
                             <h1>
-                                Chào mừng bạn đến với{' '}
-                                <span className="hl">hệ sinh thái</span>{' '}
-                                của <span className="accent">SAO</span>.
+                                Chào mừng bạn đến với hệ sinh thái của SAO
                             </h1>
                             <p className="lead">
                                 SAO ở đây để giải quyết tất cả yêu cầu của bạn. Chúng tôi sẽ biến ý tưởng
@@ -77,7 +62,6 @@ export default async function AboutPage() {
                                     rel="noopener noreferrer"
                                     className="btn-primary"
                                 >
-                                    <Sparkles size={14} className="star" />
                                     Bắt đầu ngay
                                     <ArrowRight size={15} />
                                 </Link>
@@ -94,26 +78,11 @@ export default async function AboutPage() {
                                     alt="Vạn Sao"
                                     width={280}
                                     height={280}
-                                    className="object-contain animate-wobble"
+                                    className="object-contain"
                                     priority
                                 />
                             </div>
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Stats strip */}
-            <section className="vs-about-stats">
-                <div className="vs-shell">
-                    <div className="strip">
-                        {stats.map(({ value, label }, i) => (
-                            <div key={label} className="stat">
-                                <span className="num-ghost">0{i + 1}</span>
-                                <span className="value">{value}</span>
-                                <span className="label">{label}</span>
-                            </div>
-                        ))}
                     </div>
                 </div>
             </section>
@@ -123,12 +92,8 @@ export default async function AboutPage() {
                 <div className="vs-shell">
                     <div className="grid">
                         <div className="text">
-                            <span className="vs-eyebrow">
-                                <Sparkles size={13} className="text-vs-purple" />
-                                SAO là ai?
-                            </span>
                             <h2>
-                                Một <span className="accent">ngôi sao nhỏ</span> trong lĩnh vực công nghệ.
+                                Một ngôi sao nhỏ trong lĩnh vực công nghệ
                             </h2>
                             <p>
                                 Vạn Sao là một &ldquo;ngôi sao nhỏ&rdquo; trong lĩnh vực công nghệ, với sứ mệnh biến
@@ -151,25 +116,25 @@ export default async function AboutPage() {
                                 alt="Vạn Sao"
                                 width={320}
                                 height={320}
-                                className="object-contain animate-wobble"
+                                className="object-contain"
                             />
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* SAO làm gì — 6 services */}
+            {/* SAO làm gì — các lĩnh vực chuyên môn */}
             <section className="vs-about-do">
                 <div className="vs-shell">
                     <header className="vs-sec-head">
                         <div className="left">
-                            <span className="vs-eyebrow">
-                                <Sparkles size={13} className="text-vs-purple" />
-                                SAO làm gì?
-                            </span>
                             <h2>
-                                Dịch vụ <span className="accent">đa dạng</span> — đáp ứng mọi nhu cầu của bạn.
+                                Những lĩnh vực Vạn Sao đang làm chủ
                             </h2>
+                            <p className="desc">
+                                Không chỉ website — Vạn Sao mở rộng năng lực sang sự kiện,
+                                dữ liệu và các giải pháp công nghệ quanh nhu cầu thực tế của khách hàng.
+                            </p>
                         </div>
                     </header>
 
@@ -194,12 +159,8 @@ export default async function AboutPage() {
                 <div className="vs-shell">
                     <header className="vs-sec-head">
                         <div className="left">
-                            <span className="vs-eyebrow">
-                                <Sparkles size={13} className="text-vs-purple" />
-                                Tại sao chọn SAO?
-                            </span>
                             <h2>
-                                Luôn lắng nghe, <span className="accent">không giới hạn</span>.
+                                Luôn lắng nghe, không giới hạn
                             </h2>
                             <p className="desc">
                                 SAO luôn lắng nghe và đáp ứng mọi yêu cầu của khách hàng, từ những nhu cầu
@@ -228,13 +189,8 @@ export default async function AboutPage() {
                 <div className="vs-shell">
                     <div className="card">
                         <div className="bg-blob" />
-                        <span className="vs-eyebrow yellow">
-                            <Sparkles size={13} />
-                            Sẵn sàng bắt đầu?
-                        </span>
                         <h2>
-                            Cùng Vạn Sao biến ý tưởng của bạn thành{' '}
-                            <span className="hl-yellow">điểm sáng</span>.
+                            Cùng Vạn Sao biến ý tưởng của bạn thành điểm sáng
                         </h2>
                         <p>
                             Liên hệ Vạn Sao ngay hôm nay để được tư vấn miễn phí trong 24 giờ.
@@ -247,7 +203,6 @@ export default async function AboutPage() {
                                 rel="noopener noreferrer"
                                 className="btn-primary"
                             >
-                                <Sparkles size={14} className="star" />
                                 Liên hệ qua Zalo
                                 <ArrowRight size={15} />
                             </Link>

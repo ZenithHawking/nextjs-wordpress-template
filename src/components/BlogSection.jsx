@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, ArrowUpRight, Sparkles } from 'lucide-react'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { getLatestPosts } from '@/lib/directus'
 
 function formatDate(dateStr) {
@@ -30,12 +30,8 @@ export default async function BlogSection() {
                 {/* Header */}
                 <header className="vs-sec-head">
                     <div className="left">
-                        <span className="vs-eyebrow">
-                            <Sparkles size={13} className="text-vs-purple" />
-                            Blog & Ghi chép
-                        </span>
                         <h2 id="blog-h2">
-                            Bài viết <span className="accent">mới nhất</span> — kinh nghiệm thật từ dự án thật.
+                            Bài viết mới nhất — kinh nghiệm thật từ dự án thật
                         </h2>
                     </div>
                     <Link href="/blog" className="vs-blog-link-all">

@@ -74,12 +74,8 @@ export default function BlogClient({ posts, categories }) {
             {/* Hero */}
             <section className="vs-blog-hero">
                 <div className="vs-shell">
-                    <span className="vs-eyebrow">
-                        <Sparkles size={13} className="text-vs-purple" />
-                        Blog & Ghi chép
-                    </span>
                     <h1>
-                        Kiến thức <span className="accent">thật</span> — từ dự án thật.
+                        Kiến thức thật — từ dự án thật
                     </h1>
                     <p className="lead">
                         Chia sẻ kinh nghiệm thiết kế website, công nghệ sự kiện và giải pháp số từ đội ngũ Vạn Sao.

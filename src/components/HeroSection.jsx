@@ -1,18 +1,21 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Sparkles, ArrowRight, ArrowUpRight, Monitor, CalendarHeart, DatabaseZap } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Monitor, CalendarHeart, DatabaseZap } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 export default function HeroSection() {
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
-        setMounted(true)
+        // Wait for the intro cloud to recede before revealing text + star
+        const t = setTimeout(() => setMounted(true), 1050)
+        return () => clearTimeout(t)
     }, [])
 
     return (
         <section className="vs-hero" aria-labelledby="hero-h1">
+            <div className="vs-hero-intro-cloud" aria-hidden="true" />
             <div className="vs-shell">
                 <div className="grid">
                     {/* Left — content */}
@@ -21,13 +24,10 @@ export default function HeroSection() {
                             mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                         }`}
                     >
-                        <span className="vs-eyebrow">
-                            <span className="star">★</span> Công ty công nghệ · từ 2022
-                        </span>
                         <h1 id="hero-h1">
-                            Website, sự kiện <span className="hl">&amp; dữ liệu</span>
+                            Mỗi ý tưởng
                             <br />
-                            — <span className="accent">làm gọn</span>, đúng nhu cầu.
+                            là một ngôi sao
                         </h1>
                         <p className="lead">
                             Vạn Sao giúp bạn thiết kế website, tổ chức sự kiện – tiệc cưới và chuyển dữ liệu,
@@ -42,7 +42,6 @@ export default function HeroSection() {
                                 rel="noopener noreferrer"
                                 className="btn-primary"
                             >
-                                <Sparkles size={14} className="star" />
                                 Tư vấn miễn phí qua Zalo
                                 <ArrowRight size={15} />
                             </Link>

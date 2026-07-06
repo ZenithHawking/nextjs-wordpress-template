@@ -77,7 +77,6 @@ export default function Header() {
                             rel="noopener noreferrer"
                             className="cta hidden md:inline-flex"
                         >
-                            <Sparkles size={13} className="star" />
                             Liên hệ ngay
                             <ArrowRight size={14} />
                         </Link>
@@ -134,7 +133,6 @@ export default function Header() {
                             onClick={() => setOpen(false)}
                             className="mt-4 flex items-center justify-center gap-2 rounded-full bg-vs-ink-1 px-5 py-3 text-sm font-semibold text-white"
                         >
-                            <Sparkles size={14} />
                             Liên hệ ngay
                         </Link>
                     </div>

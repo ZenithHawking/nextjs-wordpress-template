@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Monitor, CalendarHeart, DatabaseZap, ArrowRight, ArrowUpRight, Sparkles, Star } from 'lucide-react'
+import { Monitor, CalendarHeart, DatabaseZap, ArrowRight, ArrowUpRight, Star } from 'lucide-react'
 import BatRadarCard from '@/components/BatRadarCard'
 import QRCard from '@/components/QRCard'
 import UniAPICard from '@/components/UniAPICard'
+import WebSamplesCard from '@/components/WebSamplesCard'
 
 export const metadata = {
     title: 'Dịch vụ',
@@ -97,12 +98,8 @@ export default function ServicesPage() {
             {/* Hero */}
             <section className="vs-services-hero">
                 <div className="vs-shell">
-                    <span className="vs-eyebrow yellow">
-                        <Sparkles size={13} />
-                        Dịch vụ của Vạn Sao
-                    </span>
                     <h1>
-                        Giải pháp <span className="hl-yellow">toàn diện</span> cho thương hiệu của bạn.
+                        Giải pháp toàn diện cho thương hiệu của bạn
                     </h1>
                     <p className="lead">
                         Từ website đến sự kiện và dữ liệu — Vạn Sao đồng hành lâu dài, làm gọn, đúng nhu cầu, đúng ngân sách.
@@ -149,6 +146,7 @@ export default function ServicesPage() {
                                 </Link>
                             )
                         })}
+                        <WebSamplesCard />
                         <QRCard />
                         <BatRadarCard />
                         <UniAPICard />
@@ -161,13 +159,8 @@ export default function ServicesPage() {
                 <div className="vs-shell">
                     <div className="card">
                         <div className="bg-blob" />
-                        <span className="vs-eyebrow yellow">
-                            <Sparkles size={13} />
-                            Chưa biết chọn gói nào?
-                        </span>
                         <h2>
-                            Liên hệ Vạn Sao để được tư vấn{' '}
-                            <span className="hl-yellow">miễn phí</span>.
+                            Liên hệ Vạn Sao để được tư vấn miễn phí
                         </h2>
                         <p>Không mất phí, không ràng buộc — chỉ cần cho chúng tôi biết bạn cần gì.</p>
                         <div className="actions">
@@ -177,7 +170,6 @@ export default function ServicesPage() {
                                 rel="noopener noreferrer"
                                 className="btn-primary"
                             >
-                                <Sparkles size={14} className="star" />
                                 Tư vấn miễn phí
                                 <ArrowRight size={15} />
                             </Link>

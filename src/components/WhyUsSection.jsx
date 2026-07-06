@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { BadgeDollarSign, GitPullRequestArrow, ShieldCheck, Rocket, ArrowRight, Sparkles } from 'lucide-react'
+import { BadgeDollarSign, GitPullRequestArrow, ShieldCheck, Rocket, ArrowRight } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 const reasons = [
@@ -67,12 +67,8 @@ export default function WhyUsSection() {
                             transform: leftInView ? 'translateX(0)' : 'translateX(-40px)',
                         }}
                     >
-                        <span className="vs-eyebrow">
-                            <Sparkles size={13} className="text-vs-purple" />
-                            Vì sao chọn Vạn Sao
-                        </span>
                         <h2 id="why-h2">
-                            Làm gọn. <span className="accent">Đúng nhu cầu.</span> Đúng ngân sách.
+                            Làm gọn. Đúng nhu cầu. Đúng ngân sách
                         </h2>
                         <p className="desc">
                             Vạn Sao là công ty công nghệ tập trung vào giải pháp website và sự kiện —
@@ -80,19 +76,12 @@ export default function WhyUsSection() {
                             thay vì bàn giao xong là hết.
                         </p>
 
-                        <div className="vs-stats-strip">
-                            <div><b>100<span className="yel">+</span></b><span>Dự án bàn giao</span></div>
-                            <div><b>24<span className="yel">/7</span></b><span>Hỗ trợ kỹ thuật</span></div>
-                            <div><b>5<span className="yel">★</span></b><span>Đánh giá khách</span></div>
-                        </div>
-
                         <Link
                             href="https://zalo.me/0866631679"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="vs-why-cta"
                         >
-                            <Sparkles size={13} className="star" />
                             Đặt lịch tư vấn miễn phí
                             <ArrowRight size={15} />
                         </Link>

@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Monitor, CalendarHeart, DatabaseZap, ArrowUpRight, Sparkles, Star } from 'lucide-react'
+import { Monitor, CalendarHeart, DatabaseZap, ArrowUpRight, Star } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 const services = [
@@ -84,14 +84,10 @@ export default function ServicesSection() {
                     }}
                 >
                     <div className="left">
-                        <span className="vs-eyebrow">
-                            <Sparkles size={13} className="text-vs-purple" />
-                            Dịch vụ của chúng tôi
-                        </span>
                         <h2 id="svc-h2">
                             Giải pháp toàn diện cho{' '}
-                            <span className="underline">thương hiệu Việt</span>{' '}
-                            — từ web đến sự kiện.
+                            thương hiệu Việt{' '}
+                            — từ web đến sự kiện
                         </h2>
                         <p className="desc">
                             Ba nhóm dịch vụ cốt lõi của Vạn Sao — chuyên sâu, làm gọn,

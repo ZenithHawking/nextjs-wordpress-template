@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { getServiceBySlug } from '@/lib/directus'
 import { notFound } from 'next/navigation'
 
@@ -95,10 +95,6 @@ export default async function ServiceDetailPage({ params }) {
                     <Link href="/dich-vu" className="back-link">
                         <ArrowLeft size={16} /> Tất cả dịch vụ
                     </Link>
-                    <span className="vs-eyebrow yellow">
-                        <Sparkles size={13} />
-                        Dịch vụ
-                    </span>
                     <h1>{service.title}</h1>
                     {intro[0] && <p className="lead">{intro[0]}</p>}
                 </div>
@@ -138,10 +134,6 @@ export default async function ServiceDetailPage({ params }) {
                     <div className="vs-shell">
                         <header className="vs-sec-head center">
                             <div className="left">
-                                <span className="vs-eyebrow">
-                                    <Sparkles size={13} className="text-vs-purple" />
-                                    Bảng giá
-                                </span>
                                 <h2>Gói dịch vụ tham khảo</h2>
                                 <p className="desc">Liên hệ để được báo giá chính xác theo nhu cầu thực tế.</p>
                             </div>
@@ -173,10 +165,6 @@ export default async function ServiceDetailPage({ params }) {
                     <div className="vs-shell">
                         <header className="vs-sec-head center">
                             <div className="left">
-                                <span className="vs-eyebrow">
-                                    <Sparkles size={13} className="text-vs-purple" />
-                                    FAQ
-                                </span>
                                 <h2>Câu hỏi thường gặp</h2>
                             </div>
                         </header>
@@ -210,7 +198,6 @@ export default async function ServiceDetailPage({ params }) {
                         <p>Liên hệ Vạn Sao để được tư vấn và báo giá miễn phí.</p>
                         <div className="actions">
                             <Link href="/lien-he" className="btn-primary">
-                                <Sparkles size={14} className="star" />
                                 Liên hệ ngay
                                 <ArrowRight size={15} />
                             </Link>

@@ -1,7 +1,6 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
-import { Sparkles } from 'lucide-react'
 
 const steps = [
     { num: '01', title: 'Tư vấn & đề xuất', desc: 'Lắng nghe nhu cầu, mục tiêu và ngân sách. Đưa ra giải pháp phù hợp, tối ưu chi phí và hiệu quả.' },
@@ -57,12 +56,8 @@ export default function ProcessTimeline() {
                 <div className="vs-shell">
                     <header className="vs-sec-head dark">
                         <div className="left">
-                            <span className="vs-eyebrow yellow">
-                                <Sparkles size={13} />
-                                Quy trình
-                            </span>
                             <h2>
-                                Quy trình <span className="hl-yellow">5 SAO</span>
+                                Quy trình 5 SAO
                             </h2>
                         </div>
                     </header>
