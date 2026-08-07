@@ -232,19 +232,20 @@ Trả về JSON (chỉ JSON, không markdown, không giải thích):
 }}"""
 
     message = client.messages.create(
-        model="claude-sonnet-4-20250514",
-        max_tokens=4000,
+        model="claude-sonnet-5",
+        max_tokens=8000,
         messages=[{"role": "user", "content": prompt}]
     )
 
-    raw = message.content[0].text.strip()
+    text_block = next(b for b in message.content if b.type == "text")
+    raw = text_block.text.strip()
     if raw.startswith("```"):
         raw = raw.split("```")[1]
         if raw.startswith("json"):
             raw = raw[4:]
     raw = raw.strip().rstrip("```").strip()
 
-    return json.loads(raw)
+    return json.loads(raw, strict=False)
 
 
 def get_pexels_images(queries: list, count: int = 3) -> list:
