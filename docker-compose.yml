@@ -6,7 +6,7 @@ services:
     network_mode: host
     environment:
       - DIRECTUS_URL=https://api.vansao.com
-      - DIRECTUS_TOKEN=vansao-admin-token-2026
+      - DIRECTUS_TOKEN=${DIRECTUS_TOKEN}
       - NEXT_PUBLIC_SITE_URL=https://vansao.com
       - RESEND_API_KEY=${RESEND_API_KEY}
       - CONTACT_EMAIL=vansao.contact@gmail.com

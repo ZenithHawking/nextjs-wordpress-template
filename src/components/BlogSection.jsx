@@ -30,9 +30,8 @@ export default async function BlogSection() {
                 {/* Header */}
                 <header className="vs-sec-head">
                     <div className="left">
-                        <h2 id="blog-h2">
-                            Bài viết mới nhất — kinh nghiệm thật từ dự án thật
-                        </h2>
+                        <h2 id="blog-h2">Bài viết mới nhất</h2>
+                        <p className="desc">Kinh nghiệm thật, đúc kết từ những dự án đã triển khai.</p>
                     </div>
                     <Link href="/blog" className="vs-blog-link-all">
                         Xem tất cả bài viết

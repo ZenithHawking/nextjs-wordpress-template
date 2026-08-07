@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Monitor, CalendarHeart, DatabaseZap, ArrowUpRight, Star } from 'lucide-react'
+import { Monitor, CalendarHeart, DatabaseZap, ArrowUpRight, Star, Check } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 const services = [
@@ -12,7 +12,6 @@ const services = [
         href: '/dich-vu/dich-vu-thiet-ke-website',
         variant: 'purple',
         badge: 'Phổ biến nhất',
-        num: '01',
         features: [
             'Landing page · 7-14 ngày',
             'Website bán hàng · 3-4 tuần',
@@ -27,7 +26,6 @@ const services = [
         href: '/dich-vu/dich-vu-su-kien-tiec-cuoi',
         variant: 'yellow',
         badge: null,
-        num: '02',
         features: [
             'Check-in QR · gửi ảnh tức thì',
             'Tìm ảnh bằng AI khuôn mặt',
@@ -42,7 +40,6 @@ const services = [
         href: '/dich-vu/dich-vu-chuyen-du-lieu',
         variant: 'mint',
         badge: null,
-        num: '03',
         features: [
             'Giữ nguyên URL & thứ hạng SEO',
             'Ánh xạ thuộc tính tự động',
@@ -84,14 +81,9 @@ export default function ServicesSection() {
                     }}
                 >
                     <div className="left">
-                        <h2 id="svc-h2">
-                            Giải pháp toàn diện cho{' '}
-                            thương hiệu Việt{' '}
-                            — từ web đến sự kiện
-                        </h2>
+                        <h2 id="svc-h2">Giải pháp toàn diện cho thương hiệu Việt</h2>
                         <p className="desc">
-                            Ba nhóm dịch vụ cốt lõi của Vạn Sao — chuyên sâu, làm gọn,
-                            và luôn có người đồng hành thật sự thay vì bàn giao xong là hết.
+                            Ba mảng dịch vụ cốt lõi — chuyên sâu, làm gọn, luôn có người đồng hành từ đầu đến cuối.
                         </p>
                     </div>
                 </header>
@@ -111,7 +103,6 @@ export default function ServicesSection() {
                                     transitionDelay: cardsInView ? `${i * 120}ms` : '0ms',
                                 }}
                             >
-                                <span className="num-big">{service.num}</span>
                                 {service.badge && (
                                     <span className="badge">
                                         <Star size={11} fill="currentColor" />
@@ -127,7 +118,12 @@ export default function ServicesSection() {
                                 <p>{service.description}</p>
 
                                 <ul className="features">
-                                    {service.features.map((f, j) => <li key={j}>{f}</li>)}
+                                    {service.features.map((f, j) => (
+                                        <li key={j}>
+                                            <Check size={14} strokeWidth={2.5} />
+                                            {f}
+                                        </li>
+                                    ))}
                                 </ul>
 
                                 <Link href={service.href} className="more">

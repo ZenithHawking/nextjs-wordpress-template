@@ -43,3 +43,12 @@ next-env.d.ts
 
 # Docker
 *.tar
+
+# local-only notes/credentials (never push)
+CREDENTIALS.local.md
+
+# autopost (Python)
+/autopost/venv/
+/autopost/__pycache__/
+/autopost/history.json
+/autopost/*.log

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import {
     Monitor, CalendarCheck, DatabaseZap, ScanSearch,
     Megaphone, Headset, Star, CheckCircle2, Users,
-    ArrowRight
+    ArrowRight, Lightbulb, Zap
 } from 'lucide-react'
 import ProcessTimeline from '@/components/ProcessTimeline'
 
@@ -104,18 +104,20 @@ export default function AboutPage() {
                                 không chỉ trung tâm mà cả vùng ven và các tỉnh, với chi phí phù hợp và dễ tiếp cận.
                             </p>
                             <div className="tags">
-                                <span><span className="dot" /> Sáng tạo</span>
-                                <span><span className="dot purple" /> Chỉn chu</span>
-                                <span><span className="dot mint" /> Hiệu quả</span>
+                                <span><Lightbulb size={15} /> Sáng tạo</span>
+                                <span><CheckCircle2 size={15} /> Chỉn chu</span>
+                                <span><Zap size={15} /> Hiệu quả</span>
                             </div>
                         </div>
                         <div className="visual">
+                            <div className="glow" />
+                            <div className="ring-2" />
                             <div className="ring" />
                             <Image
                                 src="/logo.png"
                                 alt="Vạn Sao"
-                                width={320}
-                                height={320}
+                                width={340}
+                                height={340}
                                 className="object-contain"
                             />
                         </div>

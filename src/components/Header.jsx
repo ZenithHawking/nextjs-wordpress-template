@@ -1,9 +1,9 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
-import { Sparkles, Search, ArrowRight } from 'lucide-react'
+import { useRouter, usePathname } from 'next/navigation'
+import { Sparkles, Search, ArrowRight, X, FileText, Wrench, Loader2 } from 'lucide-react'
 
 const navLinks = [
     { href: '/',            label: 'Trang chủ' },
@@ -13,8 +13,144 @@ const navLinks = [
     { href: '/lien-he',    label: 'Liên hệ' },
 ]
 
+// Kept in sync with the service cards on /dich-vu — used for local search matching only.
+const services = [
+    { title: 'Thiết kế Website', desc: 'Thiết kế theo yêu cầu, chuẩn SEO, tối ưu tốc độ.', href: '/dich-vu/dich-vu-thiet-ke-website' },
+    { title: 'Sự kiện – Tiệc cưới', desc: 'Check-in công nghệ, tìm ảnh nhanh, hỗ trợ vận hành sự kiện.', href: '/dich-vu/dich-vu-su-kien-tiec-cuoi' },
+    { title: 'Chuyển dữ liệu web', desc: 'Chuyển bài viết, sản phẩm, hình ảnh giữa các website an toàn.', href: '/dich-vu/dich-vu-chuyen-du-lieu' },
+]
+
+function normalize(str) {
+    return str
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
+        .toLowerCase()
+}
+
+function useSearch() {
+    const [query, setQuery] = useState('')
+    const [posts, setPosts] = useState([])
+    const [loading, setLoading] = useState(false)
+    const debounceRef = useRef(null)
+    const abortRef = useRef(null)
+
+    const matchedServices = query.trim()
+        ? services.filter(s => normalize(`${s.title} ${s.desc}`).includes(normalize(query.trim())))
+        : []
+
+    useEffect(() => {
+        clearTimeout(debounceRef.current)
+        const q = query.trim()
+
+        if (!q) {
+            setPosts([])
+            setLoading(false)
+            return
+        }
+
+        setLoading(true)
+        debounceRef.current = setTimeout(async () => {
+            abortRef.current?.abort()
+            const controller = new AbortController()
+            abortRef.current = controller
+            try {
+                const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`, { signal: controller.signal })
+                const data = await res.json()
+                setPosts(data.posts ?? [])
+            } catch {
+                // ignore aborted/failed requests
+            } finally {
+                setLoading(false)
+            }
+        }, 350)
+
+        return () => clearTimeout(debounceRef.current)
+    }, [query])
+
+    return { query, setQuery, posts, matchedServices, loading }
+}
+
+function SearchPanel({ onClose }) {
+    const { query, setQuery, posts, matchedServices, loading } = useSearch()
+    const router = useRouter()
+    const inputRef = useRef(null)
+
+    useEffect(() => {
+        inputRef.current?.focus()
+    }, [])
+
+    useEffect(() => {
+        function onKeyDown(e) {
+            if (e.key === 'Escape') onClose()
+        }
+        document.addEventListener('keydown', onKeyDown)
+        return () => document.removeEventListener('keydown', onKeyDown)
+    }, [onClose])
+
+    function goToBlogSearch() {
+        if (!query.trim()) return
+        router.push(`/blog?search=${encodeURIComponent(query.trim())}`)
+        onClose()
+    }
+
+    const hasResults = posts.length > 0 || matchedServices.length > 0
+    const showEmpty = query.trim() && !loading && !hasResults
+
+    return (
+        <div className="vs-search-panel">
+            <div className="vs-shell vs-search-panel-inner">
+                <div className="row">
+                    <Search size={18} className="lead-icon" />
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        value={query}
+                        onChange={e => setQuery(e.target.value)}
+                        onKeyDown={e => e.key === 'Enter' && goToBlogSearch()}
+                        placeholder="Tìm bài viết, dịch vụ..."
+                    />
+                    {loading && <Loader2 size={16} className="spin" />}
+                    <button className="close" onClick={onClose} aria-label="Đóng tìm kiếm">
+                        <X size={18} />
+                    </button>
+                </div>
+
+                {(hasResults || showEmpty) && (
+                    <div className="results">
+                        {matchedServices.length > 0 && (
+                            <div className="group">
+                                <span className="group-label"><Wrench size={12} /> Dịch vụ</span>
+                                {matchedServices.map(s => (
+                                    <Link key={s.href} href={s.href} onClick={onClose} className="result">
+                                        <span className="t">{s.title}</span>
+                                        <span className="d">{s.desc}</span>
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                        {posts.length > 0 && (
+                            <div className="group">
+                                <span className="group-label"><FileText size={12} /> Bài viết</span>
+                                {posts.map(p => (
+                                    <Link key={p.slug} href={`/blog/${p.slug}`} onClick={onClose} className="result">
+                                        <span className="t">{p.title}</span>
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                        {showEmpty && (
+                            <p className="empty">Không tìm thấy kết quả cho “{query.trim()}”.</p>
+                        )}
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}
+
 export default function Header() {
     const [open, setOpen] = useState(false)
+    const [searchOpen, setSearchOpen] = useState(false)
     const pathname = usePathname()
 
     return (
@@ -36,7 +172,7 @@ export default function Header() {
             <header className="vs-hdr">
                 <div className="inner">
                     {/* Logo */}
-                    <Link href="/" className="brand" aria-label="Vạn Sao — Trang chủ">
+                    <Link href="/" className="brand" aria-label="Vạn Sao — Trang chủ" onClick={() => setSearchOpen(false)}>
                         <Image
                             src="/logo.png"
                             alt="Vạn Sao"
@@ -59,6 +195,7 @@ export default function Header() {
                                     href={link.href}
                                     className={isActive ? 'active' : ''}
                                     aria-current={isActive ? 'page' : undefined}
+                                    onClick={() => setSearchOpen(false)}
                                 >
                                     {link.label}
                                 </Link>
@@ -68,8 +205,13 @@ export default function Header() {
 
                     {/* CTA + mobile toggle */}
                     <div className="actions">
-                        <button className="ghost hidden md:inline-flex" aria-label="Tìm kiếm">
-                            <Search size={16} />
+                        <button
+                            className={`ghost hidden md:inline-flex ${searchOpen ? 'is-active' : ''}`}
+                            aria-label="Tìm kiếm"
+                            aria-expanded={searchOpen}
+                            onClick={() => setSearchOpen(v => !v)}
+                        >
+                            {searchOpen ? <X size={16} /> : <Search size={16} />}
                         </button>
                         <Link
                             href="https://zalo.me/0866631679"
@@ -105,9 +247,13 @@ export default function Header() {
                     </div>
                 </div>
 
+                {/* Desktop search panel */}
+                {searchOpen && <SearchPanel onClose={() => setSearchOpen(false)} />}
+
                 {/* Mobile menu */}
                 {open && (
-                    <div className="md:hidden border-t border-vs-line bg-white px-6 pb-5 pt-2">
+                    <div className="md:hidden border-t border-vs-line bg-white px-6 pb-5 pt-4">
+                        <MobileSearch onNavigate={() => setOpen(false)} />
                         {navLinks.map(link => {
                             const isActive = pathname === link.href
                             return (
@@ -139,5 +285,31 @@ export default function Header() {
                 )}
             </header>
         </>
+    )
+}
+
+function MobileSearch({ onNavigate }) {
+    const router = useRouter()
+    const [value, setValue] = useState('')
+
+    function submit() {
+        const q = value.trim()
+        if (!q) return
+        router.push(`/blog?search=${encodeURIComponent(q)}`)
+        onNavigate()
+    }
+
+    return (
+        <div className="relative mb-3">
+            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-vs-ink-4 pointer-events-none" />
+            <input
+                type="text"
+                value={value}
+                onChange={e => setValue(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && submit()}
+                placeholder="Tìm bài viết, dịch vụ..."
+                className="w-full rounded-full border border-vs-line bg-vs-bg py-2.5 pl-9 pr-4 text-sm text-vs-ink-1 placeholder-vs-ink-4 outline-none focus:border-vs-purple"
+            />
+        </div>
     )
 }

@@ -12,7 +12,7 @@ export async function generateMetadata({ params }) {
     const description = (post.excerpt ?? '').replace(/<[^>]*>/g, '').trim().slice(0, 160)
     const thumbnail = post.featured_image ?? null
     return {
-        title: `${title} | Vạn Sao`,
+        title,
         description,
         openGraph: {
             title, description, type: 'article',
