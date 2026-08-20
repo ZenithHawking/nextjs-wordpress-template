@@ -140,13 +140,27 @@ const POST_FIELDS = [
             note: 'Chọn chuyên mục. Bài dịch vụ chọn **Dịch vụ khách hàng**.',
         },
     },
+    // Auto-increment primary key — nothing to fill in, so keep it off the form.
+    {
+        field: 'id',
+        meta: { hidden: true, readonly: true, interface: 'input' },
+    },
+    // Both timestamps are filled by Directus. `date-updated` also keeps the
+    // sitemap's lastmod and the article's dateModified honest whenever a post
+    // is edited.
     {
         field: 'date_created',
-        meta: { interface: 'datetime', sort: 9, width: 'half', note: 'Ngày đăng. Để trống thì lấy thời điểm tạo.' },
+        meta: {
+            interface: 'datetime', special: ['date-created'], readonly: true,
+            sort: 9, width: 'half', note: 'Tự điền khi tạo bài.',
+        },
     },
     {
         field: 'date_updated',
-        meta: { interface: 'datetime', sort: 10, width: 'half', note: 'Cập nhật khi sửa bài — Google dùng mốc này.' },
+        meta: {
+            interface: 'datetime', special: ['date-updated'], readonly: true,
+            sort: 10, width: 'half', note: 'Tự cập nhật mỗi lần lưu. Google dùng mốc này.',
+        },
     },
 ]
 
