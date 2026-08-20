@@ -1,9 +1,11 @@
 import { getAllPosts } from '@/lib/directus'
 import { SITE_URL } from '@/lib/seo'
 
-// Rebuilt hourly instead of on every crawl. force-dynamic meant a single
-// Directus hiccup served Google a sitemap with the blog posts missing.
-export const revalidate = 3600
+// Must render per request: the CI build container cannot reach the Directus
+// host, so prerendering this at build time ships a sitemap containing only the
+// static routes. The underlying getAllPosts() fetch is itself cached for an
+// hour, so this costs one upstream call per hour, not one per crawl.
+export const dynamic = 'force-dynamic'
 
 export default async function sitemap() {
     const baseUrl = SITE_URL
