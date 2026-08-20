@@ -1,0 +1,757 @@
+<title>Sổ tay viết bài Vạn Sao</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+  /* ── Tokens: light (kế thừa design system vansao.com) ─────────────── */
+  :root {
+    --paper:      #FBFAF6;
+    --surface:    #FFFFFF;
+    --surface-2:  #F4F1E9;
+    --line:       #E6E1D4;
+    --line-soft:  #F0ECE2;
+
+    --ink-1:      #1B1F3A;
+    --ink-2:      #3A3F58;
+    --ink-3:      #6B7088;
+
+    --accent:     #7A5BE9;
+    --accent-deep:#5538C9;
+    --accent-tint:#F0EBFD;
+
+    --good:       #1E7A54;
+    --good-tint:  #E3F2EA;
+    --bad:        #B03B36;
+    --bad-tint:   #FBE9E7;
+    --warn:       #8A6100;
+    --warn-tint:  #FFF4D6;
+
+    --shadow: 0 1px 0 rgba(27,31,58,.04), 0 6px 24px -10px rgba(27,31,58,.10);
+
+    --sans: "Be Vietnam Pro", -apple-system, system-ui, sans-serif;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", monospace;
+
+    --measure: 68ch;
+  }
+
+  /* ── Tokens: dark ─────────────────────────────────────────────────── */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #14172A;
+      --surface:    #1C203A;
+      --surface-2:  #232748;
+      --line:       #333858;
+      --line-soft:  #272C4A;
+
+      --ink-1:      #EDEBE3;
+      --ink-2:      #C3C2D4;
+      --ink-3:      #8E92AC;
+
+      --accent:     #A08CF4;
+      --accent-deep:#C0B2F8;
+      --accent-tint:#262247;
+
+      --good:       #6FD3A4;
+      --good-tint:  #17301F;
+      --bad:        #F09A94;
+      --bad-tint:   #35201E;
+      --warn:       #F0C05A;
+      --warn-tint:  #322709;
+
+      --shadow: 0 1px 0 rgba(0,0,0,.2), 0 8px 28px -12px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:      #14172A;
+    --surface:    #1C203A;
+    --surface-2:  #232748;
+    --line:       #333858;
+    --line-soft:  #272C4A;
+
+    --ink-1:      #EDEBE3;
+    --ink-2:      #C3C2D4;
+    --ink-3:      #8E92AC;
+
+    --accent:     #A08CF4;
+    --accent-deep:#C0B2F8;
+    --accent-tint:#262247;
+
+    --good:       #6FD3A4;
+    --good-tint:  #17301F;
+    --bad:        #F09A94;
+    --bad-tint:   #35201E;
+    --warn:       #F0C05A;
+    --warn-tint:  #322709;
+
+    --shadow: 0 1px 0 rgba(0,0,0,.2), 0 8px 28px -12px rgba(0,0,0,.6);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink-2);
+    font-family: var(--sans);
+    font-size: 16.5px;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px 96px;
+    display: grid;
+    grid-template-columns: 232px minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+  }
+
+  /* ── Masthead ─────────────────────────────────────────────────────── */
+  .masthead {
+    grid-column: 1 / -1;
+    padding: 56px 0 36px;
+    border-bottom: 2px solid var(--ink-1);
+    margin-bottom: 44px;
+  }
+  .eyebrow {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+  .masthead h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.3rem, 5.2vw, 3.5rem);
+    line-height: 1.08;
+    letter-spacing: -.018em;
+    color: var(--ink-1);
+    margin: 0 0 18px;
+    text-wrap: balance;
+  }
+  .standfirst {
+    font-family: var(--serif);
+    font-size: clamp(1.05rem, 2vw, 1.24rem);
+    line-height: 1.6;
+    color: var(--ink-2);
+    max-width: 62ch;
+    margin: 0;
+  }
+  .standfirst em { color: var(--ink-1); font-style: italic; }
+
+  /* ── Nav rail ─────────────────────────────────────────────────────── */
+  .rail { position: sticky; top: 28px; }
+  .rail-label {
+    font-size: 11px; font-weight: 600; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 16px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .rail ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; }
+  .rail a {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 9px;
+    padding: 6px 8px 6px 4px;
+    border-radius: 6px;
+    color: var(--ink-2);
+    text-decoration: none;
+    font-size: 13.5px;
+    line-height: 1.4;
+    transition: background .15s, color .15s;
+  }
+  .rail a:hover, .rail a:focus-visible { background: var(--accent-tint); color: var(--accent-deep); }
+  .rail .n {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    color: var(--ink-3); padding-top: 2px; font-variant-numeric: tabular-nums;
+  }
+  .rail a:hover .n, .rail a:focus-visible .n { color: var(--accent-deep); }
+
+  /* ── Sections ─────────────────────────────────────────────────────── */
+  main { max-width: var(--measure); min-width: 0; }
+
+  section { margin-bottom: 72px; scroll-margin-top: 24px; }
+
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 8px; }
+  .sec-num {
+    font-family: var(--mono); font-size: 12.5px; font-weight: 500;
+    color: var(--accent); font-variant-numeric: tabular-nums;
+    padding-top: 4px; flex: none;
+  }
+  h2 {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 1.95rem);
+    line-height: 1.2; letter-spacing: -.012em;
+    color: var(--ink-1); margin: 0; text-wrap: balance;
+  }
+  .sec-sub {
+    font-size: 14.5px; color: var(--ink-3);
+    margin: 0 0 26px 36px; padding-bottom: 16px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  h3 {
+    font-family: var(--sans); font-weight: 600; font-size: 1.02rem;
+    color: var(--ink-1); margin: 34px 0 10px; letter-spacing: -.005em;
+  }
+
+  p { margin: 0 0 16px; }
+  strong { color: var(--ink-1); font-weight: 600; }
+  a { color: var(--accent-deep); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+  ul, ol { margin: 0 0 16px; padding-left: 22px; }
+  li { margin-bottom: 7px; }
+  li::marker { color: var(--ink-3); }
+
+  code {
+    font-family: var(--mono); font-size: .855em;
+    background: var(--surface-2); color: var(--ink-1);
+    padding: 1.5px 5px; border-radius: 4px;
+    border: 1px solid var(--line-soft);
+  }
+
+  /* ── Template block ───────────────────────────────────────────────── */
+  .tpl {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 10px; box-shadow: var(--shadow);
+    margin: 0 0 20px; overflow: hidden;
+  }
+  .tpl-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 9px 16px;
+    background: var(--surface-2); border-bottom: 1px solid var(--line);
+    font-size: 11.5px; font-weight: 600; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+  .tpl pre {
+    margin: 0; padding: 18px 16px; overflow-x: auto;
+    font-family: var(--mono); font-size: 12.6px; line-height: 1.78;
+    color: var(--ink-2);
+  }
+  .tpl pre b { color: var(--accent-deep); font-weight: 500; }
+  .tpl pre i { color: var(--ink-3); font-style: normal; }
+
+  /* ── Do / Don't ───────────────────────────────────────────────────── */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 0 0 20px; }
+  .card {
+    border-radius: 10px; padding: 15px 17px; border: 1px solid;
+    font-size: 14.6px; line-height: 1.62;
+  }
+  .card .tag {
+    display: block; font-size: 11px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .card.yes { background: var(--good-tint); border-color: color-mix(in srgb, var(--good) 28%, transparent); }
+  .card.yes .tag { color: var(--good); }
+  .card.no  { background: var(--bad-tint);  border-color: color-mix(in srgb, var(--bad) 28%, transparent); }
+  .card.no  .tag { color: var(--bad); }
+  .card p:last-child { margin-bottom: 0; }
+  .card code { background: rgba(127,127,127,.16); border-color: transparent; }
+
+  /* ── Callout ──────────────────────────────────────────────────────── */
+  .note {
+    border-left: 3px solid var(--warn);
+    background: var(--warn-tint);
+    padding: 14px 18px; border-radius: 0 8px 8px 0;
+    margin: 0 0 20px; font-size: 14.8px;
+  }
+  .note strong { color: var(--warn); }
+  .note p:last-child { margin-bottom: 0; }
+
+  .note.key { border-left-color: var(--accent); background: var(--accent-tint); }
+  .note.key strong { color: var(--accent-deep); }
+
+  /* ── Table ────────────────────────────────────────────────────────── */
+  .tbl-wrap { overflow-x: auto; margin: 0 0 20px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14.4px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  th {
+    font-size: 11.5px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-3);
+    border-bottom: 1px solid var(--line);
+  }
+  td:first-child { color: var(--ink-1); font-weight: 500; white-space: nowrap; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ── Checklist ────────────────────────────────────────────────────── */
+  .check { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
+  .check li {
+    display: grid; grid-template-columns: 26px 1fr; gap: 10px;
+    padding: 10px 12px; border-radius: 8px; margin: 0;
+    font-size: 14.8px; line-height: 1.58;
+    border: 1px solid var(--line-soft); background: var(--surface);
+  }
+  .check .box {
+    width: 17px; height: 17px; margin-top: 3px; border-radius: 4px;
+    border: 1.5px solid var(--accent); flex: none;
+  }
+
+  /* ── Footer ───────────────────────────────────────────────────────── */
+  footer {
+    grid-column: 1 / -1; margin-top: 8px; padding-top: 26px;
+    border-top: 1px solid var(--line); font-size: 13.5px; color: var(--ink-3);
+  }
+
+  /* ── Responsive ───────────────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .wrap { grid-template-columns: 1fr; gap: 0; }
+    .rail { position: static; margin-bottom: 44px; }
+    .rail ol { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 2px; }
+    .compare { grid-template-columns: 1fr; }
+    .sec-sub { margin-left: 0; }
+  }
+
+  a:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Vạn Sao · Nội bộ</p>
+    <h1>Sổ tay viết bài</h1>
+    <p class="standfirst">
+      Quy trình viết một bài blog trên vansao.com có cơ hội lên Google. Viết cho người
+      đang mở Directus và chưa biết bắt đầu từ đâu — <em>làm theo thứ tự từ 1 đến 8</em>.
+    </p>
+  </header>
+
+  <nav class="rail" aria-label="Mục lục">
+    <p class="rail-label">Mục lục</p>
+    <ol>
+      <li><a href="#s1"><span class="n">01</span><span>Chọn từ khóa</span></a></li>
+      <li><a href="#s2"><span class="n">02</span><span>Đặt tiêu đề</span></a></li>
+      <li><a href="#s3"><span class="n">03</span><span>Dựng dàn bài</span></a></li>
+      <li><a href="#s4"><span class="n">04</span><span>Viết nội dung</span></a></li>
+      <li><a href="#s5"><span class="n">05</span><span>Mục FAQ bắt buộc</span></a></li>
+      <li><a href="#s6"><span class="n">06</span><span>Ảnh</span></a></li>
+      <li><a href="#s7"><span class="n">07</span><span>Điền vào Directus</span></a></li>
+      <li><a href="#s8"><span class="n">08</span><span>Sau khi đăng</span></a></li>
+      <li><a href="#loi"><span class="n">—</span><span>Lỗi hay mắc</span></a></li>
+      <li><a href="#checklist"><span class="n">—</span><span>Checklist</span></a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 01 ───────────────────────────────────────────────────────── -->
+    <section id="s1">
+      <div class="sec-head"><span class="sec-num">01</span><h2>Chọn từ khóa trước, viết sau</h2></div>
+      <p class="sec-sub">Không có bước này thì mọi bước sau đều vô nghĩa.</p>
+
+      <p>
+        Sai lầm lớn nhất là nghĩ ra chủ đề hay rồi mới viết. Đúng thứ tự là: tìm xem
+        <strong>người ta đang gõ gì vào Google</strong>, rồi viết bài trả lời đúng câu đó.
+      </p>
+
+      <h3>Cách tìm nhanh, không cần công cụ trả phí</h3>
+      <ol>
+        <li>Gõ từ khóa dự định vào Google, ví dụ <code>thiết kế website đức hòa</code>.</li>
+        <li>Kéo xuống cuối trang, xem mục <strong>"Tìm kiếm có liên quan"</strong>. Đó là từ khóa thật, có người tìm.</li>
+        <li>Xem hộp <strong>"Mọi người cũng hỏi"</strong>. Mỗi câu trong đó là một mục FAQ cho bài của bạn.</li>
+        <li>Gõ từ khóa rồi dừng lại, xem Google gợi ý tiếp gì. Đó là các biến thể đang hot.</li>
+      </ol>
+
+      <h3>Từ khóa nào đáng viết</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Loại</th><th>Ví dụ</th><th>Có nên viết</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Địa phương&nbsp;+&nbsp;dịch vụ</td>
+              <td>thiết kế website Đức Hòa</td>
+              <td><strong>Ưu tiên số 1.</strong> Ít cạnh tranh, khách gần, tỉ lệ chốt cao.</td>
+            </tr>
+            <tr>
+              <td>Ngành nghề&nbsp;+&nbsp;dịch vụ</td>
+              <td>website cho xưởng cơ khí</td>
+              <td>Nên. Khách biết mình cần gì.</td>
+            </tr>
+            <tr>
+              <td>Câu hỏi mua hàng</td>
+              <td>làm website hết bao nhiêu tiền</td>
+              <td>Nên. Người hỏi giá là người sắp mua.</td>
+            </tr>
+            <tr>
+              <td>Chung chung</td>
+              <td>chuyển đổi số doanh nghiệp</td>
+              <td><strong>Không.</strong> Cạnh tranh với báo lớn, không ai mua qua bài này.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note key">
+        <p>
+          <strong>Quy tắc một bài một từ khóa.</strong> Mỗi bài nhắm đúng một từ khóa chính.
+          Hai bài cùng nhắm <code>thiết kế website Đức Hòa</code> sẽ giành chỗ của nhau
+          và cả hai cùng tụt. Muốn viết thêm về Đức Hòa thì đổi góc: theo ngành nghề,
+          theo bảng giá, theo câu hỏi cụ thể.
+        </p>
+      </div>
+    </section>
+
+    <!-- 02 ───────────────────────────────────────────────────────── -->
+    <section id="s2">
+      <div class="sec-head"><span class="sec-num">02</span><h2>Đặt tiêu đề</h2></div>
+      <p class="sec-sub">Tiêu đề là thứ hiện trên Google. Viết cho người bấm, không viết cho máy.</p>
+
+      <ul>
+        <li><strong>Tối đa 60 ký tự.</strong> Dài hơn Google cắt cụt.</li>
+        <li><strong>Từ khóa chính đặt gần đầu.</strong></li>
+        <li><strong>Thêm một lý do để bấm:</strong> con số, mốc thời gian, hoặc lời hứa cụ thể.</li>
+        <li>Đừng nhồi năm "2026" vào mọi tiêu đề. Chỉ dùng khi nội dung thật sự theo năm.</li>
+      </ul>
+
+      <div class="compare">
+        <div class="card yes">
+          <span class="tag">Nên</span>
+          <p>Thiết Kế Website Đức Hòa – Bảng Giá 2026, Bàn Giao 5–10 Ngày</p>
+          <p>Có địa danh, có giá, có thời gian. 60 ký tự.</p>
+        </div>
+        <div class="card no">
+          <span class="tag">Tránh</span>
+          <p>7 Lợi Ích Đột Phá Khi Doanh Nghiệp Việt Nắm Bắt Làn Sóng AI Doanh Nghiệp Năm 2026</p>
+          <p>Quá dài, toàn từ sáo rỗng, không ai gõ cụm này vào Google.</p>
+        </div>
+      </div>
+
+      <div class="note">
+        <p>
+          <strong>Đếm ký tự thế nào.</strong> Dán tiêu đề vào Word hoặc Google Docs,
+          xem mục đếm ký tự. Hoặc dùng <code>charactercountonline.com</code>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 03 ───────────────────────────────────────────────────────── -->
+    <section id="s3">
+      <div class="sec-head"><span class="sec-num">03</span><h2>Dựng dàn bài trước khi viết chữ nào</h2></div>
+      <p class="sec-sub">Viết thẳng không dàn bài là cách nhanh nhất để ra một bài lan man.</p>
+
+      <p>
+        Đây là khung dùng được cho mọi bài dịch vụ. Copy nguyên, đổi nội dung bên trong.
+      </p>
+
+      <div class="tpl">
+        <div class="tpl-bar"><span>Dàn bài chuẩn</span><span>~1.500–2.500 chữ</span></div>
+<pre><b>Mở bài</b> <i>(2–3 đoạn, không có tiêu đề)</i>
+  Nêu đúng vấn đề khách đang gặp. Hứa bài này trả lời gì.
+
+<b>H2</b>  Vì sao [đối tượng] cần [dịch vụ]
+  <b>H3</b>  Lý do 1 — gắn với bối cảnh địa phương
+  <b>H3</b>  Lý do 2
+  <b>H3</b>  Lý do 3
+
+<b>H2</b>  Bảng giá [dịch vụ] tại [địa phương]
+  <i>Bảng 3 gói + ghi rõ đã bao gồm gì, phí duy trì bao nhiêu</i>
+
+<b>H2</b>  Quy trình [n] bước, bàn giao trong [x] ngày
+  <i>Danh sách đánh số</i>
+
+<b>H2</b>  Vì sao chọn Vạn Sao
+  <b>H3</b>  Ở ngay tại địa phương
+  <b>H3</b>  Điểm mạnh 2
+  <b>H3</b>  Điểm mạnh 3
+
+<b>H2</b>  [Đối tượng] nào nên làm trước
+  <i>Danh sách ngành nghề cụ thể</i>
+
+<b>H2</b>  Câu hỏi thường gặp   <i>← bắt buộc, xem mục 05</i>
+  <b>H3</b>  Câu hỏi 1
+      <i>Trả lời 2–4 câu</i>
+  <b>H3</b>  Câu hỏi 2 ... (5–8 câu)
+
+<b>H2</b>  Liên hệ
+  <i>Địa chỉ + hotline + email + giờ làm việc + link nội bộ</i></pre>
+      </div>
+
+      <div class="note">
+        <p>
+          <strong>Không viết thẻ H1 trong nội dung.</strong> Website tự lấy tiêu đề bài
+          làm H1. Bạn viết thêm H1 nữa là trang có hai H1, Google trừ điểm.
+          Bắt đầu từ <code>H2</code> trở xuống.
+        </p>
+      </div>
+    </section>
+
+    <!-- 04 ───────────────────────────────────────────────────────── -->
+    <section id="s4">
+      <div class="sec-head"><span class="sec-num">04</span><h2>Viết nội dung</h2></div>
+      <p class="sec-sub">Viết như đang ngồi tư vấn trực tiếp cho một chủ xưởng.</p>
+
+      <h3>Bốn nguyên tắc</h3>
+      <ol>
+        <li><strong>Câu ngắn.</strong> Một ý một câu. Đọc lại thấy hụt hơi là câu đang dài quá.</li>
+        <li><strong>Có con số.</strong> "Giá hợp lý" là nói suông. "1–3 triệu cho web cơ bản" là thông tin.</li>
+        <li><strong>Nói cả nhược điểm.</strong> Bài dám nói "nếu chỉ cần web cho có thì tự làm cũng được" đáng tin hơn bài khen mình từ đầu tới cuối.</li>
+        <li><strong>Cụ thể về địa phương.</strong> Nhắc tên KCN, tên xã, ngành nghề thật ở đó. Đây là thứ đối thủ ở xa không viết được.</li>
+      </ol>
+
+      <div class="compare">
+        <div class="card yes">
+          <span class="tag">Nên</span>
+          <p>Riêng KCN Xuyên Á tại Mỹ Hạnh Bắc đã rộng khoảng 300,6 ha, cách trung tâm TP.HCM 22 km.</p>
+        </div>
+        <div class="card no">
+          <span class="tag">Tránh</span>
+          <p>Trong bối cảnh thị trường số hóa ngày càng khốc liệt, doanh nghiệp cần một điểm chạm đáng tin cậy.</p>
+        </div>
+      </div>
+
+      <h3>Danh sách từ cấm</h3>
+      <p>
+        Thấy mấy từ này trong bài thì xóa và viết lại bằng thông tin thật:
+        <em>đột phá, cách mạng, kỷ nguyên, bứt phá, lột xác, vượt trội, tối ưu hóa toàn diện,
+        giải pháp toàn diện, trong bối cảnh, không thể phủ nhận.</em>
+      </p>
+
+      <h3>Quy tắc gọi tên địa danh</h3>
+      <div class="note">
+        <p>
+          Từ <strong>01/7/2025</strong> tỉnh Long An đã sáp nhập vào tỉnh Tây Ninh,
+          huyện Đức Hòa giải thể thành 7 xã. Trụ sở Vạn Sao thuộc <strong>xã Mỹ Hạnh, tỉnh Tây Ninh</strong>.
+        </p>
+        <p>
+          Trong bài: dùng <code>Đức Hòa</code> và <code>Long An</code> làm <strong>từ khóa</strong>
+          vì người ta vẫn gõ như vậy. Nhưng khi ghi <strong>địa chỉ</strong> thì phải ghi tên hiện hành.
+          Tuyệt đối không viết "huyện Đức Hòa, tỉnh Long An" như một địa danh đang tồn tại —
+          đây là điểm hầu hết đối thủ đang sai, và là lợi thế của bạn.
+        </p>
+      </div>
+
+      <h3>Link nội bộ</h3>
+      <p>Mỗi bài chèn 2–4 link sang trang khác trên vansao.com. Không nhồi, đặt ở chỗ đọc thấy hợp lý:</p>
+      <ul>
+        <li><code>/dich-vu/dich-vu-thiet-ke-website</code></li>
+        <li><code>/dich-vu/dich-vu-su-kien-tiec-cuoi</code></li>
+        <li><code>/dich-vu/dich-vu-chuyen-du-lieu</code></li>
+        <li><code>/lien-he</code> — luôn có ở cuối bài</li>
+        <li>Một bài blog liên quan</li>
+      </ul>
+    </section>
+
+    <!-- 05 ───────────────────────────────────────────────────────── -->
+    <section id="s5">
+      <div class="sec-head"><span class="sec-num">05</span><h2>Mục FAQ — bắt buộc, đúng cấu trúc</h2></div>
+      <p class="sec-sub">Đây là mục cho lợi nhuận cao nhất trên mỗi phút bỏ ra.</p>
+
+      <p>
+        Website đã được lập trình để <strong>tự đọc mục FAQ và sinh dữ liệu FAQ schema</strong>
+        gửi cho Google. Kết quả là bài của bạn có thể hiện ra dạng câu hỏi mở rộng ngay
+        trên trang tìm kiếm, chiếm nhiều diện tích hơn hẳn kết quả thường.
+      </p>
+      <p>
+        Nhưng nó chỉ chạy khi bạn viết <strong>đúng cấu trúc</strong>:
+      </p>
+
+      <div class="tpl">
+        <div class="tpl-bar"><span>Cấu trúc FAQ</span><span>bắt buộc đúng</span></div>
+<pre><b>H2</b>  Câu hỏi thường gặp        <i>← đúng chữ này, hoặc "FAQ"</i>
+
+  <b>H3</b>  Làm website mất bao lâu?     <i>← câu hỏi là H3</i>
+  <b>p</b>   Thường 5–10 ngày làm việc…   <i>← trả lời là đoạn văn</i>
+
+  <b>H3</b>  Chi phí duy trì bao nhiêu?
+  <b>p</b>   Chỉ gồm tên miền và hosting…
+
+<b>H2</b>  Liên hệ                   <i>← H2 kế tiếp kết thúc mục FAQ</i></pre>
+      </div>
+
+      <h3>Viết 5–8 câu, lấy từ đâu</h3>
+      <ul>
+        <li>Câu khách hay hỏi qua Zalo và điện thoại — đây là nguồn tốt nhất.</li>
+        <li>Hộp <strong>"Mọi người cũng hỏi"</strong> trên Google.</li>
+        <li>Câu hỏi về giá, thời gian, bảo hành, quyền sở hữu, hỗ trợ sau bàn giao.</li>
+      </ul>
+
+      <div class="note">
+        <p>
+          <strong>Trả lời thẳng vào câu hỏi ngay câu đầu tiên.</strong> Google lấy đúng
+          câu đầu để hiển thị. Hỏi "mất bao lâu" thì câu đầu phải có con số ngày,
+          không phải "còn tùy vào nhiều yếu tố".
+        </p>
+      </div>
+    </section>
+
+    <!-- 06 ───────────────────────────────────────────────────────── -->
+    <section id="s6">
+      <div class="sec-head"><span class="sec-num">06</span><h2>Ảnh</h2></div>
+      <p class="sec-sub">Ảnh thật thắng ảnh stock, đặc biệt với SEO địa phương.</p>
+
+      <ul>
+        <li>
+          <strong>Ưu tiên ảnh tự chụp:</strong> văn phòng, màn hình website đã làm cho khách,
+          ảnh gặp khách tại chỗ. Google phân biệt được ảnh gốc và ảnh stock, và ảnh gốc
+          là tín hiệu mạnh cho local SEO.
+        </li>
+        <li><strong>Đặt tên file có nghĩa</strong> trước khi upload: <code>thiet-ke-website-duc-hoa.jpg</code>, không phải <code>IMG_4821.jpg</code>.</li>
+        <li><strong>Điền alt text</strong> mô tả đúng nội dung ảnh. Không nhồi từ khóa.</li>
+        <li><strong>Nén trước khi upload.</strong> Kéo vào <code>squoosh.app</code>, xuất WebP hoặc JPG dưới 200 KB. Ảnh nặng làm trang chậm, Google hạ hạng.</li>
+        <li>Ảnh bìa nên tỉ lệ ngang khoảng <span class="num">1200×630</span> — đây là kích thước hiện khi chia sẻ lên Facebook, Zalo.</li>
+      </ul>
+    </section>
+
+    <!-- 07 ───────────────────────────────────────────────────────── -->
+    <section id="s7">
+      <div class="sec-head"><span class="sec-num">07</span><h2>Điền vào Directus</h2></div>
+      <p class="sec-sub">Sáu ô. Ô nào cũng có quy tắc riêng.</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Ô</th><th>Điền gì</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>title</td>
+              <td>Tiêu đề đã chốt ở mục 02. Tối đa 60 ký tự.</td>
+            </tr>
+            <tr>
+              <td>slug</td>
+              <td>
+                Không dấu, cách nhau bằng gạch ngang, chứa từ khóa chính, ngắn gọn.<br>
+                <code>thiet-ke-website-duc-hoa</code> — tốt.<br>
+                <code>thiet-ke-website-duc-hoa-bang-gia-2026-ban-giao-nhanh</code> — quá dài.<br>
+                <strong>Đặt xong đừng đổi.</strong> Đổi slug là mất toàn bộ thứ hạng đã có.
+              </td>
+            </tr>
+            <tr>
+              <td>excerpt</td>
+              <td>
+                Đây chính là <strong>mô tả hiện dưới tiêu đề trên Google</strong>, không phải tóm tắt nội bộ.
+                Viết <span class="num">140–158</span> ký tự, một câu hoàn chỉnh, chứa từ khóa chính,
+                có lý do để bấm. Đừng chép lại câu đầu bài.
+              </td>
+            </tr>
+            <tr>
+              <td>content</td>
+              <td>Nội dung HTML. Bắt đầu từ H2, không có H1.</td>
+            </tr>
+            <tr>
+              <td>featured_image</td>
+              <td>Ảnh bìa đã nén và đặt tên đúng.</td>
+            </tr>
+            <tr>
+              <td>status</td>
+              <td>
+                Để <code>draft</code> khi đang viết. Đổi sang <code>publish</code> khi xong —
+                chỉ bài <code>publish</code> mới lên website và vào sitemap.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Ví dụ excerpt đạt</h3>
+      <div class="tpl">
+        <div class="tpl-bar"><span>excerpt</span><span>155 ký tự</span></div>
+<pre>Thiết kế website tại Đức Hòa (nay là xã Mỹ Hạnh, tỉnh
+Tây Ninh): bảng giá từ 1 triệu, bàn giao 5–10 ngày,
+chuẩn SEO từ nền tảng. Vạn Sao ở ngay địa phương.</pre>
+      </div>
+      <p>
+        Có từ khóa, có địa danh cũ lẫn mới, có giá, có thời gian, có lý do chọn. Đủ trong 155 ký tự.
+      </p>
+    </section>
+
+    <!-- 08 ───────────────────────────────────────────────────────── -->
+    <section id="s8">
+      <div class="sec-head"><span class="sec-num">08</span><h2>Sau khi đăng</h2></div>
+      <p class="sec-sub">Đăng xong chưa phải là xong.</p>
+
+      <ol>
+        <li>Mở bài trên điện thoại, đọc lại. Lỗi chính tả và câu lủng củng lộ ra ngay trên màn hình nhỏ.</li>
+        <li>
+          Vào <strong>Google Search Console</strong> → <em>URL Inspection</em> → dán link bài
+          → bấm <strong>Request Indexing</strong>. Làm <strong>một lần</strong>.
+          Bấm lại nhiều lần không nhanh hơn.
+        </li>
+        <li>Chia sẻ lên Facebook và Zalo của Vạn Sao. Lượt truy cập thật là tín hiệu tốt.</li>
+        <li>Ghi ngày đăng vào một file để 3 tháng sau còn biết bài nào cần cập nhật.</li>
+      </ol>
+
+      <h3>Bao lâu thì thấy kết quả</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Mốc</th><th>Kỳ vọng hợp lý</th></tr></thead>
+          <tbody>
+            <tr><td class="num">3–7 ngày</td><td>Bài vào index. Kiểm tra: gõ <code>site:vansao.com/blog/ten-bai</code> vào Google.</td></tr>
+            <tr><td class="num">2–4 tuần</td><td>Bắt đầu có lượt hiển thị trong Search Console.</td></tr>
+            <tr><td class="num">2–3 tháng</td><td>Thứ hạng bắt đầu ổn định.</td></tr>
+            <tr><td class="num">6 tháng</td><td>Đủ dữ liệu để biết bài nào đáng viết tiếp theo hướng đó.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <p>
+          <strong>Đừng sửa bài liên tục trong tháng đầu.</strong> Google cần thời gian đánh giá.
+          Sửa qua sửa lại làm quá trình bắt đầu lại từ đầu.
+        </p>
+      </div>
+    </section>
+
+    <!-- Lỗi ──────────────────────────────────────────────────────── -->
+    <section id="loi">
+      <div class="sec-head"><span class="sec-num">—</span><h2>Lỗi hay mắc</h2></div>
+      <p class="sec-sub">Rút từ 59 bài đã đăng trên vansao.com.</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Lỗi</th><th>Hậu quả</th></tr></thead>
+          <tbody>
+            <tr><td>Viết chủ đề chung chung</td><td>Không ai tìm. 28/59 bài cũ rơi vào nhóm này, kéo cả site xuống hạng nội dung giá trị thấp.</td></tr>
+            <tr><td>Bỏ trống hoặc viết excerpt qua loa</td><td>Google tự viết mô tả thay bạn, thường cắt ngang một câu vô nghĩa. Tỉ lệ bấm giảm.</td></tr>
+            <tr><td>Viết H1 trong nội dung</td><td>Trang có hai H1.</td></tr>
+            <tr><td>Bỏ mục FAQ</td><td>Mất cơ hội hiện rich result — thứ chiếm nhiều diện tích nhất trên trang kết quả.</td></tr>
+            <tr><td>Đổi slug sau khi đã đăng</td><td>Mất sạch thứ hạng đã tích lũy, link cũ hỏng.</td></tr>
+            <tr><td>Dùng địa danh đã giải thể</td><td>Lệch thông tin với Google Business Profile, giảm độ tin cậy local.</td></tr>
+            <tr><td>Đăng nhiều bài kém thay vì ít bài tốt</td><td>Bài kém kéo bài tốt xuống theo. Ba bài chất một tuần hơn bảy bài lấp chỗ.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Checklist ─────────────────────────────────────────────────── -->
+    <section id="checklist">
+      <div class="sec-head"><span class="sec-num">—</span><h2>Checklist trước khi bấm publish</h2></div>
+      <p class="sec-sub">Chạy hết danh sách này. Thiếu một dòng thì chưa đăng.</p>
+
+      <ul class="check">
+        <li><span class="box" aria-hidden="true"></span><span>Từ khóa chính đã kiểm tra trên Google, có người tìm thật</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Không có bài cũ nào đang nhắm cùng từ khóa này</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Tiêu đề ≤ 60 ký tự, từ khóa nằm gần đầu</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Slug không dấu, ngắn, chứa từ khóa</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Excerpt 140–158 ký tự, câu hoàn chỉnh, có từ khóa</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Nội dung bắt đầu từ H2, không có H1</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Có mục H2 "Câu hỏi thường gặp" với 5–8 cặp H3 + đoạn văn</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Có ít nhất một bảng giá hoặc danh sách có con số cụ thể</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Có 2–4 link nội bộ, trong đó có <code>/lien-he</code></span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Ảnh bìa đã nén dưới 200 KB, tên file có nghĩa, có alt text</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Địa chỉ ghi đúng: xã Mỹ Hạnh, tỉnh Tây Ninh</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Đã đọc lại toàn bài, không còn từ trong danh sách cấm</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Đổi status sang <code>publish</code></span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Đã Request Indexing trong Search Console</span></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    Vạn Sao · Xã Mỹ Hạnh, tỉnh Tây Ninh · 08 666 31679 · Tài liệu nội bộ, cập nhật khi quy trình thay đổi.
+  </footer>
+
+</div>
