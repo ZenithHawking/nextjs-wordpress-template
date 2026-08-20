@@ -47,73 +47,99 @@ WRITING_ANGLES = [
     "Viết dạng giới thiệu công nghệ mới nhất trong lĩnh vực",
 ]
 
-# ─── LỊCH THEO THỨ ────────────────────────────────────────
+# ─── ĐỊA BÀN PHỤC VỤ ─────────────────────────────────────
+# Long An sáp nhập vào Tây Ninh từ 01/7/2025, huyện Đức Hòa giải thể thành 7 xã.
+# Địa chỉ pháp lý là xã Mỹ Hạnh, tỉnh Tây Ninh; tên cũ vẫn là từ khóa chính.
+BUSINESS_ADDRESS = "Xã Mỹ Hạnh, tỉnh Tây Ninh (Đức Hòa, Long An cũ)"
+BUSINESS_HOURS   = "8h30 - 17h00, hỗ trợ 24/7"
+
+# ─── LỊCH ĐĂNG BÀI ───────────────────────────────────────
+# 3 bài/tuần: Thứ 2, Thứ 4, Thứ 6. Ngày khác không đăng.
+#
+# Lịch cũ chạy 7 ngày/tuần và 4 ngày trong đó sinh bài công nghệ chung chung
+# (AI doanh nghiệp, chuyển đổi số, công cụ năng suất). Những bài đó không có
+# ai tìm, không có ý định mua, và làm loãng chủ đề của cả site — Google xếp
+# site vào nhóm nội dung giá trị thấp và không index bài nào.
+#
+# Lịch mới chỉ sinh bài bám 2 trục: dịch vụ Vạn Sao thật sự bán, và địa bàn
+# Vạn Sao thật sự phục vụ.
 SCHEDULE = {
-    0: {  # Thứ 2
-        "type": "fixed",
-        "service": "Data Migration - Chuyển đổi dữ liệu",
-        "keywords": ["chuyển đổi dữ liệu", "data migration", "di chuyển dữ liệu doanh nghiệp", "migrate database"],
-        "pexels_queries": ["data migration server", "database transfer technology", "cloud data migration", "server infrastructure"],
-        "category_id": CAT_DICH_VU,
-    },
-    1: {  # Thứ 3 - xoay vòng sản phẩm
+    0: {  # Thứ 2 — dịch vụ cốt lõi
         "type": "rotating",
         "services": [
             {
-                "service": "Face Matching - Nhận diện khuôn mặt",
-                "keywords": ["nhận diện khuôn mặt", "check-in khuôn mặt", "face recognition AI", "chấm công khuôn mặt"],
-                "pexels_queries": ["face recognition biometric", "facial scan security", "AI face detection", "biometric attendance"],
+                "service": "Thiết kế website chuẩn SEO cho doanh nghiệp nhỏ",
+                "keywords": ["thiết kế website chuẩn SEO", "làm website doanh nghiệp nhỏ", "chi phí thiết kế website", "website bán hàng"],
+                "pexels_queries": ["web design workspace", "website development laptop", "small business owner computer"],
             },
             {
-                "service": "Smart Album - Tìm ảnh thông minh",
-                "keywords": ["tìm ảnh bằng AI", "smart album", "quản lý ảnh sự kiện", "photo search AI"],
-                "pexels_queries": ["smart photo album AI", "photo management technology", "event photography digital", "AI image search"],
+                "service": "Chuyển dữ liệu website không mất thứ hạng SEO",
+                "keywords": ["chuyển dữ liệu website", "chuyển web không mất SEO", "đổi hosting giữ SEO", "migrate website"],
+                "pexels_queries": ["server data transfer", "database migration technology", "web hosting datacenter"],
             },
             {
-                "service": "Smart Translate - Dịch thuật AI",
-                "keywords": ["dịch thuật AI", "phần mềm dịch thuật tự động", "dịch đa ngôn ngữ", "AI translation"],
-                "pexels_queries": ["translation technology multilingual", "AI language translation", "global communication", "multilingual business"],
+                "service": "Tổ chức sự kiện và tiệc cưới trọn gói",
+                "keywords": ["tổ chức sự kiện", "tiệc cưới trọn gói", "dịch vụ sự kiện doanh nghiệp", "check-in sự kiện QR"],
+                "pexels_queries": ["wedding reception venue", "corporate event stage", "event checkin guests"],
+            },
+            {
+                "service": "Bảng giá và quy trình làm website — giải đáp cho người mới",
+                "keywords": ["giá thiết kế website", "làm website mất bao lâu", "quy trình thiết kế website", "nên thuê hay tự làm website"],
+                "pexels_queries": ["business meeting consultation", "price planning desk", "web designer client"],
             },
         ],
         "category_id": CAT_DICH_VU,
     },
-    2: {  # Thứ 4
-        "type": "fixed",
-        "service": "Thiết kế website chuyên nghiệp",
-        "keywords": ["thiết kế website chuyên nghiệp", "làm website doanh nghiệp", "web design chuẩn SEO", "tạo website đẹp"],
-        "pexels_queries": ["web design workspace", "website development laptop", "UI UX design modern", "professional website mockup"],
+    2: {  # Thứ 4 — theo địa bàn
+        "type": "rotating",
+        "services": [
+            {
+                "service": "Thiết kế website tại Hậu Nghĩa (Đức Hòa cũ)",
+                "keywords": ["thiết kế website Hậu Nghĩa", "làm web Hậu Nghĩa", "thiết kế website Đức Hòa", "web doanh nghiệp Tây Ninh"],
+                "pexels_queries": ["local business storefront", "small town shop owner", "vietnam street business"],
+            },
+            {
+                "service": "Thiết kế website tại Bến Lức",
+                "keywords": ["thiết kế website Bến Lức", "làm web Bến Lức", "web doanh nghiệp Bến Lức", "thiết kế website Tây Ninh"],
+                "pexels_queries": ["industrial park factory", "logistics warehouse", "business district vietnam"],
+            },
+            {
+                "service": "Thiết kế website tại Củ Chi",
+                "keywords": ["thiết kế website Củ Chi", "làm web Củ Chi", "web doanh nghiệp Củ Chi", "thiết kế website ngoại thành"],
+                "pexels_queries": ["suburban business", "farm produce business", "local workshop"],
+            },
+            {
+                "service": "Thiết kế website cho doanh nghiệp trong khu công nghiệp Đức Hòa",
+                "keywords": ["website khu công nghiệp Đức Hòa", "web nhà máy Đức Hòa", "thiết kế website KCN Xuyên Á", "web B2B Đức Hòa"],
+                "pexels_queries": ["factory production line", "industrial manufacturing", "warehouse logistics"],
+            },
+        ],
         "category_id": CAT_DICH_VU,
     },
-    3: {  # Thứ 5
-        "type": "tavily",
-        "search_query": "AI technology trends Vietnam business 2026",
-        "context": "Triển khai AI doanh nghiệp - xu hướng và ứng dụng thực tế",
-        "keywords_base": ["AI doanh nghiệp", "trí tuệ nhân tạo 2026", "công nghệ AI Việt Nam"],
-        "pexels_queries": ["artificial intelligence technology", "AI robot business", "machine learning data", "tech innovation"],
-        "category_id": CAT_TIN,
-    },
-    4: {  # Thứ 6
-        "type": "tavily",
-        "search_query": "technology tips business productivity tools 2026",
-        "context": "Chia sẻ kinh nghiệm và mẹo công nghệ hữu ích cho doanh nghiệp",
-        "keywords_base": ["kinh nghiệm công nghệ", "mẹo năng suất công việc", "công cụ doanh nghiệp"],
-        "pexels_queries": ["business productivity technology", "office technology tips", "digital workspace", "tech business solution"],
-        "category_id": CAT_CHIA_SE,
-    },
-    5: {  # Thứ 7
-        "type": "tavily",
-        "search_query": "trending tech VPS cloud hosting AI tools news 2026",
-        "context": "Chia sẻ kinh nghiệm VPS, cloud, hosting và công cụ AI đang hot",
-        "keywords_base": ["VPS cloud hosting", "công cụ AI hot 2026", "xu hướng công nghệ"],
-        "pexels_queries": ["cloud server technology", "VPS hosting datacenter", "cloud computing", "server room"],
-        "category_id": CAT_CHIA_SE,
-    },
-    6: {  # Chủ nhật
-        "type": "tavily",
-        "search_query": "digital transformation small business Vietnam technology 2026",
-        "context": "Chia sẻ kinh nghiệm chuyển đổi số cho doanh nghiệp vừa và nhỏ",
-        "keywords_base": ["chuyển đổi số doanh nghiệp", "công nghệ SME", "digital transformation Việt Nam"],
-        "pexels_queries": ["digital transformation office", "small business technology", "startup tech workspace", "entrepreneur digital"],
+    4: {  # Thứ 6 — theo ngành nghề khách hàng
+        "type": "rotating",
+        "services": [
+            {
+                "service": "Website cho xưởng cơ khí, gia công, sản xuất",
+                "keywords": ["website xưởng cơ khí", "web công ty sản xuất", "website gia công", "web B2B nhà máy"],
+                "pexels_queries": ["metal workshop machinery", "cnc machining factory", "welding manufacturing"],
+            },
+            {
+                "service": "Website cho cửa hàng vật liệu xây dựng và nội thất",
+                "keywords": ["website vật liệu xây dựng", "web cửa hàng nội thất", "website bán vật tư", "web bán hàng xây dựng"],
+                "pexels_queries": ["building materials store", "furniture showroom", "construction supply"],
+            },
+            {
+                "service": "Website cho nhà hàng, quán ăn và dịch vụ tiệc",
+                "keywords": ["website nhà hàng", "web quán ăn", "website đặt tiệc", "menu online nhà hàng"],
+                "pexels_queries": ["restaurant interior dining", "vietnamese food restaurant", "catering event food"],
+            },
+            {
+                "service": "Website cho nhà trọ, phòng cho thuê công nhân",
+                "keywords": ["website nhà trọ", "web cho thuê phòng trọ", "đăng tin phòng trọ online", "nhà trọ công nhân khu công nghiệp"],
+                "pexels_queries": ["apartment rental building", "room for rent", "residential housing"],
+            },
+        ],
         "category_id": CAT_CHIA_SE,
     },
 }
@@ -166,8 +192,11 @@ def tavily_search(query: str) -> str:
         return ""
 
 
-def get_today_schedule() -> dict:
+def get_today_schedule() -> dict | None:
+    """Return today's topic, or None on a day we do not publish."""
     weekday = datetime.now().weekday()
+    if weekday not in SCHEDULE:
+        return None
     schedule = SCHEDULE[weekday].copy()
 
     if schedule["type"] == "rotating":
@@ -200,12 +229,22 @@ def generate_article(schedule: dict, trend_context: str = "") -> dict:
 
     prompt = f"""Bạn là chuyên gia viết content SEO tiếng Việt cho công ty Vạn Sao.
 
-Vạn Sao cung cấp: Thiết kế website, Face Matching, Smart Album, Smart Translate, Data Migration, Triển khai AI.
+Vạn Sao cung cấp: Thiết kế website chuẩn SEO, Tổ chức sự kiện - tiệc cưới, Chuyển dữ liệu web,
+Face Matching, Smart Album, Smart Translate.
 
-Thông tin liên hệ (dùng trong CTA):
-- Hotline: 08 666 31679
+Thông tin liên hệ (dùng trong CTA, ghi ĐÚNG như dưới đây):
+- Hotline / Zalo: 08 666 31679
 - Email: vansao.contact@gmail.com
-- Địa chỉ: TP.HCM
+- Địa chỉ: {BUSINESS_ADDRESS}
+- Giờ làm việc: {BUSINESS_HOURS}
+
+BỐI CẢNH ĐỊA PHƯƠNG (bắt buộc nắm đúng, viết sai là mất uy tín):
+- Từ 01/7/2025 tỉnh Long An đã sáp nhập vào tỉnh Tây Ninh.
+- Huyện Đức Hòa không còn tồn tại, được sắp xếp lại thành 7 xã.
+- Trụ sở Vạn Sao thuộc xã Mỹ Hạnh, tỉnh Tây Ninh.
+- Người dân vẫn quen gọi "Đức Hòa" và "Long An" nên VẪN dùng các tên này làm
+  từ khóa trong bài, nhưng khi nêu địa chỉ pháp lý thì phải ghi tên hiện hành.
+- KHÔNG viết "huyện Đức Hòa, tỉnh Long An" như một địa danh đang tồn tại.
 
 Chủ đề bài hôm nay: **{schedule.get("service") or schedule.get("context", "")}**
 Năm hiện tại: {datetime.now().year} — bắt buộc dùng đúng năm này, KHÔNG dùng năm khác.
@@ -220,13 +259,21 @@ Yêu cầu bài viết:
 - Độ dài: 1200–2000 chữ
 - H2, H3 rõ ràng, cấu trúc logic theo góc độ viết đã chọn
 - Tự nhiên, không spam keyword
-- CTA cuối bài liên hệ Vạn Sao
+- Viết cho chủ doanh nghiệp nhỏ đọc, không viết cho dân kỹ thuật. Câu ngắn,
+  cụ thể, có con số. Tránh từ sáo rỗng kiểu "đột phá", "cách mạng", "kỷ nguyên".
+- Nêu con số và mốc thời gian thật khi có: giá 1–3 triệu (web cơ bản),
+  4–8 triệu (web bán hàng), 8–15 triệu+ (web nâng cao); bàn giao 5–10 ngày;
+  bảo hành 2 năm.
+- BẮT BUỘC có một mục H2 đúng tiêu đề "Câu hỏi thường gặp", bên trong là 5–8
+  cặp H3 (câu hỏi) + đoạn p (câu trả lời 2–4 câu). Website tự sinh FAQ schema
+  từ mục này để lấy rich result trên Google, nên cấu trúc phải đúng.
+- CTA cuối bài liên hệ Vạn Sao, kèm địa chỉ và hotline ở trên.
 - Hướng chuyển đổi, thuyết phục khách hàng
 
 Trả về JSON (chỉ JSON, không markdown, không giải thích):
 {{
   "title": "Tiêu đề hoàn toàn mới, độc đáo, hấp dẫn, chứa keyword chính",
-  "excerpt": "Tóm tắt 150-160 ký tự, dùng làm mô tả SEO và đoạn preview bài viết",
+  "excerpt": "Mô tả SEO 140-158 ký tự. Phải là một câu hoàn chỉnh mời đọc, chứa từ khóa chính, KHÔNG chép lại câu đầu bài, KHÔNG kết thúc giữa chừng.",
   "content": "Nội dung HTML đầy đủ với H2, H3, p, ul, li. Không có H1.",
   "pexels_search": "2-4 từ tiếng Anh để tìm ảnh Pexels phù hợp nội dung"
 }}"""
@@ -345,6 +392,10 @@ def main():
     print(f"[{datetime.now()}] Bắt đầu auto post...")
 
     schedule = get_today_schedule()
+    if schedule is None:
+        print("Hôm nay không có lịch đăng bài. Thoát.")
+        return
+
     print(f"Chủ đề: {schedule.get('service') or schedule.get('context', '')}")
 
     trend_context = ""
