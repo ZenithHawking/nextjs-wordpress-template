@@ -1,9 +1,12 @@
 import { getAllPosts } from '@/lib/directus'
+import { SITE_URL } from '@/lib/seo'
 
-export const dynamic = 'force-dynamic'
+// Rebuilt hourly instead of on every crawl. force-dynamic meant a single
+// Directus hiccup served Google a sitemap with the blog posts missing.
+export const revalidate = 3600
 
 export default async function sitemap() {
-    const baseUrl = 'https://vansao.com'
+    const baseUrl = SITE_URL
 
     const staticRoutes = [
         { url: baseUrl,                  lastModified: new Date(), changeFrequency: 'weekly',  priority: 1.0 },

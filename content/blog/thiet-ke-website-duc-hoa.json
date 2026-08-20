@@ -1,0 +1,21 @@
+{
+  "title": "Thiết Kế Website Đức Hòa – Bảng Giá 2026, Bàn Giao 5–10 Ngày",
+  "slug": "thiet-ke-website-duc-hoa",
+  "excerpt": "Thiết kế website tại Đức Hòa (nay là xã Mỹ Hạnh, tỉnh Tây Ninh): bảng giá từ 1 triệu, bàn giao 5–10 ngày, chuẩn SEO từ nền tảng. Vạn Sao ở ngay địa phương.",
+  "status": "publish",
+  "category_id": 2,
+  "content_file": "thiet-ke-website-duc-hoa.html",
+  "featured_image": null,
+  "_notes": {
+    "category_id": "2 = Dịch vụ khách hàng (theo autopost/auto_post.py)",
+    "featured_image": "Đặt asset id hoặc /assets/<uuid> sau khi upload ảnh bìa lên Directus. Ảnh nên là ảnh thật chụp tại địa phương, không dùng stock — Google đánh giá cao ảnh gốc cho local SEO.",
+    "primary_keyword": "thiết kế website Đức Hòa",
+    "secondary_keywords": [
+      "thiết kế web Đức Hòa",
+      "làm website Đức Hòa",
+      "thiết kế website xã Mỹ Hạnh",
+      "thiết kế website Tây Ninh",
+      "giá thiết kế website Đức Hòa"
+    ]
+  }
+}

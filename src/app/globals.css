@@ -1194,6 +1194,14 @@
   border-radius: 0 12px 12px 0; padding: 16px 24px;
 }
 .vs-prose img { border-radius: 12px; }
+/* Pricing tables must not push the article column wide on mobile. */
+.vs-prose table {
+  display: block; width: 100%; overflow-x: auto; border-collapse: collapse;
+}
+.vs-prose th, .vs-prose td {
+  border: 1px solid var(--vs-line); padding: 10px 14px; vertical-align: top;
+}
+.vs-prose thead th { background: var(--vs-purple-tint); text-align: left; }
 
 /* Share bar */
 .vs-post-detail .share-bar {

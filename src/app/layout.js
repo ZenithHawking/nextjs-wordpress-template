@@ -3,6 +3,7 @@ import { Geist } from 'next/font/google'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import './globals.css'
+import { localBusinessSchema, BUSINESS, SITE_URL } from '@/lib/seo'
 import { Be_Vietnam_Pro } from 'next/font/google'
 
 const font = Be_Vietnam_Pro({
@@ -12,23 +13,38 @@ const font = Be_Vietnam_Pro({
 
 const geist = Geist({ subsets: ['latin'] })
 
+const SITE_TITLE = 'Vạn Sao — Thiết kế Website, Sự kiện & Chuyển dữ liệu'
+const SITE_DESC =
+    'Vạn Sao thiết kế website chuẩn SEO, tổ chức sự kiện – tiệc cưới và chuyển dữ liệu web. ' +
+    'Phục vụ doanh nghiệp tại xã Mỹ Hạnh, Đức Hòa (Tây Ninh) và TP. Hồ Chí Minh. Giá minh bạch, bảo hành 2 năm.'
+
 export const metadata = {
-    metadataBase: new URL('https://vansao.com'),
+    metadataBase: new URL(SITE_URL),
     title: {
-        default: 'Vạn Sao — Thiết kế Website, Sự kiện & Chuyển dữ liệu',
+        default: SITE_TITLE,
         template: '%s | Vạn Sao',
     },
-    description: 'Vạn Sao chuyên thiết kế website chuẩn SEO, tổ chức sự kiện tiệc cưới và chuyển dữ liệu web. Giải pháp chuyên nghiệp, đúng ngân sách tại TP. Hồ Chí Minh.',
-    keywords: ['thiết kế website', 'tổ chức sự kiện', 'tiệc cưới', 'chuyển dữ liệu web', 'SEO', 'Vạn Sao', 'TP HCM'],
-    authors: [{ name: 'Vạn Sao', url: 'https://vansao.com' }],
+    description: SITE_DESC,
+    keywords: [
+        'thiết kế website Đức Hòa',
+        'thiết kế website Mỹ Hạnh',
+        'thiết kế website Tây Ninh',
+        'thiết kế web Long An',
+        'thiết kế website chuẩn SEO',
+        'tổ chức sự kiện',
+        'tiệc cưới',
+        'chuyển dữ liệu web',
+        'Vạn Sao',
+    ],
+    authors: [{ name: 'Vạn Sao', url: SITE_URL }],
     creator: 'Vạn Sao',
     openGraph: {
         type: 'website',
         locale: 'vi_VN',
-        url: 'https://vansao.com',
+        url: SITE_URL,
         siteName: 'Vạn Sao',
-        title: 'Vạn Sao — Thiết kế Website, Sự kiện & Chuyển dữ liệu',
-        description: 'Vạn Sao chuyên thiết kế website chuẩn SEO, tổ chức sự kiện tiệc cưới và chuyển dữ liệu web.',
+        title: SITE_TITLE,
+        description: SITE_DESC,
         images: [{
             url: '/og-image.png',
             width: 1200,
@@ -38,8 +54,8 @@ export const metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Vạn Sao — Thiết kế Website, Sự kiện & Chuyển dữ liệu',
-        description: 'Vạn Sao chuyên thiết kế website chuẩn SEO, tổ chức sự kiện tiệc cưới và chuyển dữ liệu web.',
+        title: SITE_TITLE,
+        description: SITE_DESC,
         images: ['/og-image.png'],
     },
     robots: {
@@ -54,29 +70,20 @@ export const metadata = {
         },
     },
     alternates: {
-        canonical: 'https://vansao.com',
+        canonical: SITE_URL,
     },
 }
 
-const orgSchema = {
+// Declares the site as a searchable entity and ties every page back to the
+// business node defined in localBusinessSchema.
+const websiteSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Vạn Sao',
-    url: 'https://vansao.com',
-    logo: 'https://vansao.com/logo.png',
-    telephone: '0866631679',
-    email: 'vansao.contact@gmail.com',
-    address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'TP. Hồ Chí Minh',
-        addressCountry: 'VN',
-    },
-    sameAs: [
-        'https://www.facebook.com/profile.php?id=61576379972366',
-        'https://zalo.me/0866631679',
-    ],
-    description: 'Vạn Sao chuyên thiết kế website chuẩn SEO, tổ chức sự kiện tiệc cưới và chuyển dữ liệu web tại TP. Hồ Chí Minh. Tiên phong công nghệ mới, giá cả minh bạch, bảo hành 2 năm.',
-    knowsAbout: ['Thiết kế website', 'Tổ chức sự kiện', 'Tiệc cưới', 'Chuyển dữ liệu web', 'SEO', 'Next.js'],
+    '@type': 'WebSite',
+    '@id': `${SITE_URL}/#website`,
+    url: SITE_URL,
+    name: BUSINESS.name,
+    inLanguage: 'vi-VN',
+    publisher: { '@id': `${SITE_URL}/#business` },
 }
 
 export default function RootLayout({ children }) {
@@ -85,7 +92,11 @@ export default function RootLayout({ children }) {
       <body className={font.className}>
       <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
       <Header/>
       <main>{children}</main>

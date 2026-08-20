@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { MapPin, Mail, Phone, Sparkles } from 'lucide-react'
+import { MapPin, Mail, Phone, Clock, Sparkles } from 'lucide-react'
+import { BUSINESS } from '@/lib/seo'
 
 const navLinks = [
     { href: '/',            label: 'Trang chủ' },
@@ -16,10 +17,13 @@ const serviceLinks = [
     { href: '/dich-vu/dich-vu-chuyen-du-lieu',    label: 'Chuyển dữ liệu web' },
 ]
 
+// NAP must match localBusinessSchema and the Google Business Profile exactly —
+// any mismatch weakens local ranking.
 const contacts = [
-    { icon: MapPin, label: 'Văn phòng',  value: 'TP. Hồ Chí Minh, Việt Nam',      href: null },
-    { icon: Mail,   label: 'Gửi email',  value: 'vansao.contact@gmail.com',       href: 'mailto:vansao.contact@gmail.com' },
-    { icon: Phone,  label: 'Hotline 24/7', value: '08 666 31679',                 href: 'tel:0866631679' },
+    { icon: MapPin, label: 'Văn phòng',    value: BUSINESS.addressLine,        href: null },
+    { icon: Clock,  label: 'Giờ làm việc', value: BUSINESS.openingHoursDisplay, href: null },
+    { icon: Mail,   label: 'Gửi email',    value: BUSINESS.email,              href: `mailto:${BUSINESS.email}` },
+    { icon: Phone,  label: 'Hotline 24/7', value: BUSINESS.phoneDisplay,       href: `tel:${BUSINESS.phone}` },
 ]
 
 export default function Footer() {

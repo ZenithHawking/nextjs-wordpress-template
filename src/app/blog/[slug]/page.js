@@ -3,26 +3,39 @@ import Image from 'next/image'
 import { ArrowLeft, ArrowRight, Calendar, Clock, Share2, ChevronRight } from 'lucide-react'
 import { getPostBySlug, getLatestPosts } from '@/lib/directus'
 import { notFound } from 'next/navigation'
+import {
+    SITE_URL,
+    cleanDescription,
+    keywordsFromTitle,
+    extractFaq,
+    faqSchema,
+    breadcrumbSchema,
+    demoteContentH1,
+} from '@/lib/seo'
 
 export async function generateMetadata({ params }) {
     const { slug } = await params
     const post = await getPostBySlug(slug)
     if (!post) return {}
     const title = post.title ?? ''
-    const description = (post.excerpt ?? '').replace(/<[^>]*>/g, '').trim().slice(0, 160)
+    const description = cleanDescription(post.excerpt, post.content)
     const thumbnail = post.featured_image ?? null
     return {
         title,
         description,
+        keywords: keywordsFromTitle(title),
         openGraph: {
             title, description, type: 'article',
             locale: 'vi_VN',
             siteName: 'Vạn Sao',
-            publishedTime: post.date_created, modifiedTime: post.date_updated,
+            url: `${SITE_URL}/blog/${slug}`,
+            publishedTime: post.date_created,
+            // Fall back to the creation date so the tag is never emitted empty.
+            modifiedTime: post.date_updated ?? post.date_created,
             images: thumbnail ? [{ url: thumbnail, width: 1200, height: 630, alt: title }] : [],
         },
         twitter: { card: 'summary_large_image', title, description, images: thumbnail ? [thumbnail] : [] },
-        alternates: { canonical: `https://vansao.com/blog/${slug}` },
+        alternates: { canonical: `${SITE_URL}/blog/${slug}` },
     }
 }
 
@@ -50,22 +63,40 @@ export default async function BlogPostPage({ params }) {
     const related = relatedPosts.filter(p => p.slug !== slug).slice(0, 2)
     const categoryName = post.categories?.[0]?.categories_id?.name ?? null
 
+    const pageUrl = `${SITE_URL}/blog/${slug}`
+
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
         headline: title,
-        description: stripHtml(post.excerpt ?? '').slice(0, 160),
+        description: cleanDescription(post.excerpt, post.content),
         image: thumbnail ?? undefined,
         datePublished: post.date_created,
-        dateModified: post.date_updated,
-        author: { '@type': 'Organization', name: 'Vạn Sao' },
-        publisher: { '@type': 'Organization', name: 'Vạn Sao', logo: { '@type': 'ImageObject', url: 'https://vansao.com/logo.png' } },
-        mainEntityOfPage: { '@type': 'WebPage', '@id': `https://vansao.com/blog/${slug}` },
+        // Google drops articles whose dateModified is null.
+        dateModified: post.date_updated ?? post.date_created,
+        author: { '@type': 'Organization', name: 'Vạn Sao', url: SITE_URL },
+        publisher: { '@id': `${SITE_URL}/#business` },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+        inLanguage: 'vi-VN',
     }
+
+    // Posts that contain a "FAQ" section get an FAQPage block, which is what
+    // earns the expandable Q&A rich result in Google.
+    const faq = faqSchema(extractFaq(post.content ?? ''), pageUrl)
+
+    const breadcrumbs = breadcrumbSchema([
+        { name: 'Trang chủ', url: SITE_URL },
+        { name: 'Blog', url: `${SITE_URL}/blog` },
+        { name: title, url: pageUrl },
+    ])
 
     return (
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+            {faq && (
+                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
+            )}
 
             <main className="vs-post-detail">
 
@@ -100,7 +131,7 @@ export default async function BlogPostPage({ params }) {
                             <div className="article-col">
                                 <article
                                     className="vs-prose prose prose-lg max-w-none"
-                                    dangerouslySetInnerHTML={{ __html: post.content ?? '' }}
+                                    dangerouslySetInnerHTML={{ __html: demoteContentH1(post.content) }}
                                 />
 
                                 {/* Share */}
