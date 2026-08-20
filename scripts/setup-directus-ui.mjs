@@ -69,9 +69,12 @@ const POST_FIELDS = [
     {
         field: 'slug',
         meta: {
-            interface: 'input', required: true, sort: 2, width: 'half',
-            options: { slug: true, trim: true, placeholder: 'thiet-ke-website-duc-hoa' },
-            note: 'Đường dẫn bài viết: vansao.com/blog/**slug**. Không dấu, ngắn, chứa từ khóa. ⚠️ Đăng rồi thì **không đổi** — đổi là mất sạch thứ hạng.',
+            // Not `required`: field-level validation runs before the filter hook,
+            // so a required slug rejects the save before the flow that fills it
+            // ever gets to see the payload. See setup-directus-slug-flow.mjs.
+            interface: 'input', required: false, sort: 2, width: 'half',
+            options: { slug: true, trim: true, placeholder: 'để trống — tự sinh từ Title' },
+            note: 'Đường dẫn bài: vansao.com/blog/**slug**. **Để trống thì tự sinh từ Title.** Muốn tự đặt thì gõ vào, ô này tự bỏ dấu. ⚠️ Đăng rồi thì **không đổi** — đổi là mất sạch thứ hạng.',
         },
     },
     {
@@ -257,6 +260,21 @@ async function main() {
             },
         }),
     )
+
+    // 3b. Let the slug column accept null on the way in.
+    //
+    //     Directus checks NOT NULL before it runs the items.create filter hook,
+    //     so a non-nullable slug is rejected before the flow that generates it
+    //     ever sees the payload. The column stays UNIQUE, and `title` is still
+    //     NOT NULL, so the flow always has something to derive a slug from.
+    const slugField = await api('GET', '/fields/posts/slug')
+    if (slugField.data.schema?.is_nullable === false) {
+        await run('cho phép posts.slug null (flow sẽ điền trước khi ghi)', () =>
+            api('PATCH', '/fields/posts/slug', { schema: { is_nullable: true } }),
+        )
+    } else {
+        plan.push('posts.slug đã nullable — bỏ qua')
+    }
 
     // 4. Interface metadata for every remaining field.
     for (const { field, meta } of POST_FIELDS) {
