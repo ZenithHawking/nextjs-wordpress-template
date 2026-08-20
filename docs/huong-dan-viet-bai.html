@@ -607,7 +607,12 @@
     <!-- 07 ───────────────────────────────────────────────────────── -->
     <section id="s7">
       <div class="sec-head"><span class="sec-num">07</span><h2>Điền vào Directus</h2></div>
-      <p class="sec-sub">Sáu ô. Ô nào cũng có quy tắc riêng.</p>
+      <p class="sec-sub">Mở <strong>api.vansao.com/admin</strong> → Content → posts → nút <strong>+</strong></p>
+
+      <p>
+        Form đã được cấu hình lại: soạn thảo có nút định dạng, chọn chuyên mục ngay
+        trên trang, tải ảnh trực tiếp. Không cần biết HTML.
+      </p>
 
       <div class="tbl-wrap">
         <table>
@@ -616,43 +621,63 @@
           </thead>
           <tbody>
             <tr>
-              <td>title</td>
+              <td>Title</td>
               <td>Tiêu đề đã chốt ở mục 02. Tối đa 60 ký tự.</td>
             </tr>
             <tr>
-              <td>slug</td>
+              <td>Slug</td>
               <td>
-                Không dấu, cách nhau bằng gạch ngang, chứa từ khóa chính, ngắn gọn.<br>
+                Không dấu, gạch ngang, chứa từ khóa, ngắn.<br>
                 <code>thiet-ke-website-duc-hoa</code> — tốt.<br>
                 <code>thiet-ke-website-duc-hoa-bang-gia-2026-ban-giao-nhanh</code> — quá dài.<br>
-                <strong>Đặt xong đừng đổi.</strong> Đổi slug là mất toàn bộ thứ hạng đã có.
+                <strong>Đăng rồi thì đừng đổi.</strong> Đổi slug là mất toàn bộ thứ hạng đã có.
               </td>
             </tr>
             <tr>
-              <td>excerpt</td>
+              <td>Status</td>
+              <td>
+                Chọn <strong>Nháp</strong> khi đang viết, <strong>Đăng</strong> khi xong.
+                Chỉ bài Đăng mới lên website và vào sitemap.
+              </td>
+            </tr>
+            <tr>
+              <td>Excerpt</td>
               <td>
                 Đây chính là <strong>mô tả hiện dưới tiêu đề trên Google</strong>, không phải tóm tắt nội bộ.
-                Viết <span class="num">140–158</span> ký tự, một câu hoàn chỉnh, chứa từ khóa chính,
-                có lý do để bấm. Đừng chép lại câu đầu bài.
+                <span class="num">140–158</span> ký tự, một câu hoàn chỉnh, có từ khóa chính và lý do để bấm.
+                Đừng chép lại câu đầu bài.
               </td>
             </tr>
             <tr>
-              <td>content</td>
-              <td>Nội dung HTML. Bắt đầu từ H2, không có H1.</td>
-            </tr>
-            <tr>
-              <td>featured_image</td>
-              <td>Ảnh bìa đã nén và đặt tên đúng.</td>
-            </tr>
-            <tr>
-              <td>status</td>
+              <td>Content</td>
               <td>
-                Để <code>draft</code> khi đang viết. Đổi sang <code>publish</code> khi xong —
-                chỉ bài <code>publish</code> mới lên website và vào sitemap.
+                Soạn thảo trực tiếp. Chọn <strong>Heading 2</strong> / <strong>Heading 3</strong>
+                từ thanh công cụ cho các mục. Không dùng Heading 1.
+                Cần xem HTML thô thì bấm nút <code>&lt;/&gt;</code> trên thanh công cụ.
               </td>
+            </tr>
+            <tr>
+              <td>Featured file</td>
+              <td>Bấm để tải ảnh bìa lên. Đây là ô ảnh dùng cho bài mới.</td>
+            </tr>
+            <tr>
+              <td>Featured image</td>
+              <td>Ô cũ dạng đường dẫn chữ. <strong>Để trống</strong> nếu đã chọn ảnh ở ô trên.</td>
+            </tr>
+            <tr>
+              <td>Categories</td>
+              <td>Bấm <em>Add existing</em>, chọn chuyên mục. Bài dịch vụ chọn <strong>Dịch vụ khách hàng</strong>.</td>
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <div class="note">
+        <p>
+          <strong>Dán từ Word hay Google Docs?</strong> Dán bằng <code>Ctrl+Shift+V</code>
+          để bỏ định dạng rác, rồi tự đặt lại Heading. Dán thẳng sẽ kéo theo hàng đống
+          thẻ style thừa làm bài hiển thị lệch.
+        </p>
       </div>
 
       <h3>Ví dụ excerpt đạt</h3>
@@ -742,8 +767,9 @@ chuẩn SEO từ nền tảng. Vạn Sao ở ngay địa phương.</pre>
         <li><span class="box" aria-hidden="true"></span><span>Có 2–4 link nội bộ, trong đó có <code>/lien-he</code></span></li>
         <li><span class="box" aria-hidden="true"></span><span>Ảnh bìa đã nén dưới 200 KB, tên file có nghĩa, có alt text</span></li>
         <li><span class="box" aria-hidden="true"></span><span>Địa chỉ ghi đúng: xã Mỹ Hạnh, tỉnh Tây Ninh</span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Đã chọn Categories trên form</span></li>
         <li><span class="box" aria-hidden="true"></span><span>Đã đọc lại toàn bài, không còn từ trong danh sách cấm</span></li>
-        <li><span class="box" aria-hidden="true"></span><span>Đổi status sang <code>publish</code></span></li>
+        <li><span class="box" aria-hidden="true"></span><span>Đổi Status sang <strong>Đăng</strong></span></li>
         <li><span class="box" aria-hidden="true"></span><span>Đã Request Indexing trong Search Console</span></li>
       </ul>
     </section>
