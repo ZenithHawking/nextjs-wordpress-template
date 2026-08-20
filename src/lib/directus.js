@@ -22,14 +22,22 @@ function resolveImageUrl(path) {
     return `${DIRECTUS_URL}${path}`
 }
 
+// `featured_file` is the file picker in the Directus admin and holds a plain
+// file UUID; `featured_image` is the older column holding a path string, still
+// populated on posts created before the picker existed and by the autopost
+// script. Prefer the uploaded file, fall back to the path.
 function resolvePostImages(posts) {
     return posts.map(p => ({
         ...p,
-        featured_image: resolveImageUrl(p.featured_image),
+        featured_image: p.featured_file
+            ? `${DIRECTUS_URL}/assets/${p.featured_file}`
+            : resolveImageUrl(p.featured_image),
     }))
 }
 
-// M2M relation not configured in Directus meta, so we join manually
+// The junction is now registered in Directus meta, so `categories.categories_id.*`
+// would expand in a single request. Kept as a manual join because every caller
+// already relies on this shape; collapsing it is a separate change.
 async function attachCategories(posts) {
     if (!posts.length) return posts
     const postIds = posts.map(p => p.id)
