@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react'
-import { getServiceBySlug } from '@/lib/directus'
+import { getServiceBySlug, getRelatedPosts } from '@/lib/directus'
 import { notFound } from 'next/navigation'
 
 const allowedSlugs = [
@@ -85,6 +85,11 @@ export default async function ServiceDetailPage({ params }) {
     }
 
     const { intro, includes, pricing, faq } = parseContent(service.content)
+
+    // Link the service page down into the blog cluster on the same topic.
+    // Without this the articles are orphans: nothing but the blog index and the
+    // sitemap points at them, so none of this page's authority reaches them.
+    const related = await getRelatedPosts(service.title ?? '', { count: 3 })
 
     return (
         <main className="vs-svc-detail">
@@ -183,6 +188,35 @@ export default async function ServiceDetailPage({ params }) {
                                         </div>
                                     )}
                                 </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
+
+            {/* Bài viết liên quan */}
+            {related.length > 0 && (
+                <section className="vs-svc-detail-reads">
+                    <div className="vs-shell">
+                        <header className="vs-sec-head">
+                            <div className="left">
+                                <h2>Tìm hiểu thêm</h2>
+                                <p className="desc">Kinh nghiệm thực tế về dịch vụ này.</p>
+                            </div>
+                            <Link href="/blog" className="vs-blog-link-all">
+                                Tất cả bài viết
+                                <ArrowRight size={15} />
+                            </Link>
+                        </header>
+
+                        <div className="reads-grid">
+                            {related.map(post => (
+                                <Link key={post.id} href={`/blog/${post.slug}`} className="read-card">
+                                    <h3>{post.title}</h3>
+                                    <span className="more">
+                                        Đọc bài <ArrowRight size={14} />
+                                    </span>
+                                </Link>
                             ))}
                         </div>
                     </div>

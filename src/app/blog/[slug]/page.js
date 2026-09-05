@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, ArrowRight, Calendar, Clock, Share2, ChevronRight } from 'lucide-react'
-import { getPostBySlug, getLatestPosts } from '@/lib/directus'
+import { getPostBySlug, getRelatedPosts } from '@/lib/directus'
 import { notFound } from 'next/navigation'
 import {
     SITE_URL,
@@ -54,13 +54,16 @@ function readingTime(content) {
 
 export default async function BlogPostPage({ params }) {
     const { slug } = await params
-    const [post, relatedPosts] = await Promise.all([getPostBySlug(slug), getLatestPosts(3)])
+    const post = await getPostBySlug(slug)
     if (!post) notFound()
+
+    // Related posts are ranked against this post's own title, so the links in
+    // the sidebar stay on-topic instead of pointing at whatever is newest.
+    const related = await getRelatedPosts(post.title ?? '', { excludeSlug: slug, count: 3 })
 
     const thumbnail = post.featured_image ?? null
     const title = post.title ?? ''
     const minutes = readingTime(post.content ?? '')
-    const related = relatedPosts.filter(p => p.slug !== slug).slice(0, 2)
     const categoryName = post.categories?.[0]?.categories_id?.name ?? null
 
     const pageUrl = `${SITE_URL}/blog/${slug}`

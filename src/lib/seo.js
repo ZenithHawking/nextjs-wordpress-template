@@ -211,20 +211,69 @@ export function breadcrumbSchema(trail) {
     }
 }
 
+// Words that carry no topical signal, so they must not make two posts look
+// related to each other.
+const STOP_WORDS = new Set([
+    'và', 'của', 'cho', 'với', 'các', 'những', 'là', 'có', 'trong', 'khi',
+    'được', 'này', 'đó', 'một', 'từ', 'về', 'tại', 'ra', 'sao', 'gì', 'không',
+    'khi', 'nào', 'như', 'thế', 'sau', 'trước', 'đến', 'bao', 'nhiêu', 'hay',
+    'nên', 'phải', 'còn', 'đã', 'sẽ', 'nhất', 'rất', 'lại', 'mọi', 'mỗi',
+    'bạn', 'chúng', 'tôi', 'doanh', 'nghiệp', 'năm', '2025', '2026',
+])
+
+/** Split text into lowercase content words, dropping stop words and noise. */
+export function tokenize(text) {
+    return stripHtml(text)
+        .toLowerCase()
+        .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+        .split(/\s+/)
+        .filter(w => w.length > 2 && !STOP_WORDS.has(w))
+}
+
+/**
+ * Rank posts by how much their title overlaps a reference text.
+ *
+ * Every post used to show the three newest posts as "related", which linked
+ * articles that share nothing. Overlap-ranked links tell search engines which
+ * pages actually belong to the same topic, and let a visitor keep reading
+ * about the thing they came for.
+ *
+ * Ties and empty overlaps fall back to publication order, so the slot is
+ * always filled.
+ */
+export function rankByRelevance(posts, referenceText, { excludeSlug = null, limit = 3 } = {}) {
+    const reference = new Set(tokenize(referenceText))
+    if (!reference.size) return posts.filter(p => p.slug !== excludeSlug).slice(0, limit)
+
+    return posts
+        .filter(p => p.slug !== excludeSlug)
+        .map(post => {
+            const tokens = new Set(tokenize(post.title ?? ''))
+            let shared = 0
+            for (const token of tokens) if (reference.has(token)) shared++
+            // Normalise by the shorter side so a long title is not penalised.
+            const score = shared / Math.max(1, Math.min(reference.size, tokens.size))
+            return { post, score, shared }
+        })
+        .sort((a, b) =>
+            b.shared - a.shared ||
+            b.score - a.score ||
+            new Date(b.post.date_created ?? 0) - new Date(a.post.date_created ?? 0),
+        )
+        .slice(0, limit)
+        .map(entry => entry.post)
+}
+
 /**
  * Derive per-post keywords from the title so posts stop inheriting the
  * site-wide keyword list, which made every article look like the same page.
  */
 export function keywordsFromTitle(title, extra = []) {
-    const stop = new Set([
-        'và', 'của', 'cho', 'với', 'các', 'những', 'là', 'có', 'trong', 'khi',
-        'được', 'này', 'đó', 'một', 'từ', 'về', 'tại', 'ra', 'sao', 'gì', 'không',
-    ])
     const words = stripHtml(title)
         .toLowerCase()
         .replace(/[^\p{L}\p{N}\s]/gu, ' ')
         .split(/\s+/)
-        .filter(w => w.length > 2 && !stop.has(w))
+        .filter(w => w.length > 2 && !STOP_WORDS.has(w))
 
     const phrases = []
     for (let i = 0; i < words.length - 1; i++) phrases.push(`${words[i]} ${words[i + 1]}`)

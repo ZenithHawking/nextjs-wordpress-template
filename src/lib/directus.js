@@ -1,3 +1,5 @@
+import { rankByRelevance } from '@/lib/seo'
+
 const DIRECTUS_URL = process.env.DIRECTUS_URL
 const DIRECTUS_TOKEN = process.env.DIRECTUS_TOKEN
 
@@ -91,6 +93,20 @@ export async function getPosts(page = 1, perPage = 9, search = '') {
     const totalPages = Math.ceil(total / perPage)
     const posts = await attachCategories(resolvePostImages(data.data ?? []))
     return { posts, total, totalPages }
+}
+
+/**
+ * Posts whose titles overlap `referenceText`, newest-first as the tiebreak.
+ *
+ * Pulls a recent pool and ranks it in memory: Directus has no relevance
+ * ranking, and the archive is small enough that one query beats several.
+ */
+export async function getRelatedPosts(referenceText, { excludeSlug = null, count = 3, pool = 60 } = {}) {
+    const data = await directusFetch(
+        `/items/posts?fields=*&sort=-date_created&limit=${pool}&filter[status][_eq]=publish`
+    )
+    const posts = await attachCategories(resolvePostImages(data?.data ?? []))
+    return rankByRelevance(posts, referenceText, { excludeSlug, limit: count })
 }
 
 export async function getPostBySlug(slug) {
