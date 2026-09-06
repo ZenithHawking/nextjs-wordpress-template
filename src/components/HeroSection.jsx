@@ -78,7 +78,8 @@ export default function HeroSection() {
 
                         {/* Big star — the mascot, not the flat logo */}
                         <div className="big-star mascot-host">
-                            <Mascot name={MASCOTS.nhayMat} size={230} motion="float" priority />
+                            {/* .big-star already floats, so the mascot adds no idle motion of its own. */}
+                            <Mascot name={MASCOTS.nhayMat} size={230} motion="none" priority />
                         </div>
 
                         <div className="orbit orbit-a">

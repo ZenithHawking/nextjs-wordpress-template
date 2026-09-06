@@ -1433,6 +1433,46 @@
   animation: vs-icon-wiggle .5s cubic-bezier(.34,1.56,.64,1) forwards;
 }
 
+/* ── Big hero star: dance on hover ──────────────────────────────────────
+   Lunges right, overshoots back, then wobbles down to rest. The vertical
+   hop and the scale on the same keyframes are what read as dancing rather
+   than sliding. */
+@keyframes vs-star-dance {
+  0%   { transform: translate(0, 0) rotate(0) scale(1) }
+  18%  { transform: translate(26px, -10px) rotate(11deg) scale(1.06) }
+  36%  { transform: translate(-16px, 2px) rotate(-9deg) scale(1.04) }
+  52%  { transform: translate(11px, -7px) rotate(6deg) scale(1.05) }
+  68%  { transform: translate(-7px, 1px) rotate(-4deg) scale(1.02) }
+  82%  { transform: translate(4px, -3px) rotate(2deg) scale(1.01) }
+  92%  { transform: translate(-2px, 0) rotate(-1deg) scale(1) }
+  100% { transform: translate(0, 0) rotate(0) scale(1) }
+}
+
+/* Homepage hero. More specific than the generic .mascot-host hover, and it
+   restates animation-play-state because that rule pauses the idle float. */
+.vs-hero-scene .big-star:hover .vs-mascot img,
+.vs-hero-scene .big-star:focus-visible .vs-mascot img {
+  animation: vs-star-dance .95s cubic-bezier(.36,.07,.19,.97) both;
+  animation-play-state: running;
+  transform: none;
+}
+
+/* About page hero — a plain <img> already running the idle wobble. */
+.vs-about-hero .logo-frame { cursor: pointer }
+.vs-about-hero .logo-frame:hover img {
+  animation: vs-star-dance .95s cubic-bezier(.36,.07,.19,.97) both;
+}
+.vs-about-hero .logo-frame:hover .glow {
+  animation: vs-mascot-breathe 1s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vs-hero-scene .big-star:hover .vs-mascot img,
+  .vs-hero-scene .big-star:focus-visible .vs-mascot img,
+  .vs-about-hero .logo-frame:hover img,
+  .vs-about-hero .logo-frame:hover .glow { animation: none }
+}
+
 /* Cards that already carry a hover transform must not fight this one */
 .vs-service-card, .vs-reason, .vs-contact-info .info-row, .social-link, .svc-tiles .tile {
   transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s, border-color .3s;
