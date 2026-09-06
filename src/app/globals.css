@@ -1304,6 +1304,38 @@
 .vs-state .actions {
   display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 4px;
 }
+/* There is no global .btn-primary / .btn-ghost — every section defines its own,
+   so these pages need theirs. Both share one box model, or a <button> and a
+   <Link> sitting side by side come out different heights. */
+.vs-state .btn-primary,
+.vs-state .btn-ghost {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 48px; padding: 0 26px; border-radius: 999px;
+  font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1;
+  text-decoration: none; cursor: pointer; white-space: nowrap;
+  transition: transform .18s, box-shadow .18s, border-color .18s, background .18s;
+}
+.vs-state .btn-primary {
+  background: var(--vs-purple); color: #fff; border: 1px solid var(--vs-purple);
+  font-weight: 700;
+  box-shadow: 0 2px 12px rgba(122,91,233,.28);
+}
+.vs-state .btn-primary:hover {
+  transform: translateY(-2px); box-shadow: var(--vs-shadow-pop);
+  background: var(--vs-purple-deep); border-color: var(--vs-purple-deep);
+}
+.vs-state .btn-ghost {
+  background: var(--vs-paper); color: var(--vs-ink-2);
+  border: 1px solid var(--vs-line);
+}
+.vs-state .btn-ghost:hover {
+  transform: translateY(-2px);
+  border-color: var(--vs-purple-soft); color: var(--vs-ink-1);
+}
+.vs-state .btn-primary:focus-visible,
+.vs-state .btn-ghost:focus-visible {
+  outline: 2px solid var(--vs-purple); outline-offset: 3px;
+}
 .vs-state .help {
   margin: 10px 0 0; font-size: .9rem; color: var(--vs-ink-3);
 }
@@ -1312,6 +1344,112 @@
 
 /* Blog empty state uses the mascot instead of a generic icon */
 .vs-blog-empty .vs-mascot { margin-bottom: 4px }
+
+/* ── Icon hover: lift the tile, wiggle the glyph ────────────────────────
+   Applied by hovering the card, not the icon, so the whole tile is the
+   target — a 22px icon is an awkward thing to have to hit. */
+@keyframes vs-icon-wiggle {
+  0%   { transform: rotate(0) scale(1) }
+  25%  { transform: rotate(-11deg) scale(1.16) }
+  50%  { transform: rotate(9deg) scale(1.16) }
+  75%  { transform: rotate(-6deg) scale(1.12) }
+  100% { transform: rotate(0) scale(1.1) }
+}
+
+.vs-svc-card .icon-box,
+.vs-service-card .icon-box,
+.vs-featured-card .icon-box,
+.vs-qr-card .icon-box,
+.vs-uniapi-card .icon-box,
+.vs-contact-info .info-row .icon-box,
+.social-link .icon-box,
+.vs-reason .icon,
+.vs-hero-scene .chip .ico,
+.svc-tiles .tile .icon-box,
+.vs-ftr .contact-mini li .icon,
+.vs-contact-card .ico {
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s, background .3s;
+}
+.vs-svc-card .icon-box > svg,
+.vs-service-card .icon-box > svg,
+.vs-featured-card .icon-box > svg,
+.vs-qr-card .icon-box > svg,
+.vs-uniapi-card .icon-box > svg,
+.vs-contact-info .info-row .icon-box > svg,
+.social-link .icon-box > svg,
+.vs-reason .icon > svg,
+.vs-hero-scene .chip .ico > svg,
+.svc-tiles .tile .icon-box > svg,
+.vs-ftr .contact-mini li .icon > svg,
+.vs-contact-card .ico > svg {
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+
+/* Hovering the containing card runs the wiggle */
+.vs-svc-card:hover .icon-box > svg,
+.vs-service-card:hover .icon-box > svg,
+.vs-featured-card:hover .icon-box > svg,
+.vs-qr-card:hover .icon-box > svg,
+.vs-uniapi-card:hover .icon-box > svg,
+.vs-contact-info .info-row:hover .icon-box > svg,
+.social-link:hover .icon-box > svg,
+.vs-reason:hover .icon > svg,
+.vs-hero-scene .chip:hover .ico > svg,
+.svc-tiles .tile:hover .icon-box > svg,
+.vs-ftr .contact-mini li:hover .icon > svg,
+.vs-contact-card:hover .ico > svg {
+  animation: vs-icon-wiggle .5s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+
+/* The tile itself lifts and deepens */
+.vs-svc-card:hover .icon-box,
+.vs-service-card:hover .icon-box,
+.vs-featured-card:hover .icon-box,
+.vs-qr-card:hover .icon-box,
+.vs-uniapi-card:hover .icon-box,
+.vs-contact-info .info-row:hover .icon-box,
+.social-link:hover .icon-box,
+.vs-reason:hover .icon,
+.vs-hero-scene .chip:hover .ico,
+.svc-tiles .tile:hover .icon-box,
+.vs-ftr .contact-mini li:hover .icon,
+.vs-contact-card:hover .ico {
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 8px 20px -8px rgba(27,31,58,.32);
+}
+
+/* Cards that already carry a hover transform must not fight this one */
+.vs-service-card, .vs-reason, .vs-contact-info .info-row, .social-link, .svc-tiles .tile {
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s, border-color .3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vs-svc-card:hover .icon-box > svg,
+  .vs-service-card:hover .icon-box > svg,
+  .vs-featured-card:hover .icon-box > svg,
+  .vs-qr-card:hover .icon-box > svg,
+  .vs-uniapi-card:hover .icon-box > svg,
+  .vs-contact-info .info-row:hover .icon-box > svg,
+  .social-link:hover .icon-box > svg,
+  .vs-reason:hover .icon > svg,
+  .vs-hero-scene .chip:hover .ico > svg,
+  .svc-tiles .tile:hover .icon-box > svg,
+  .vs-ftr .contact-mini li:hover .icon > svg,
+  .vs-contact-card:hover .ico > svg { animation: none }
+
+  .vs-svc-card:hover .icon-box,
+  .vs-service-card:hover .icon-box,
+  .vs-featured-card:hover .icon-box,
+  .vs-qr-card:hover .icon-box,
+  .vs-uniapi-card:hover .icon-box,
+  .vs-contact-info .info-row:hover .icon-box,
+  .social-link:hover .icon-box,
+  .vs-reason:hover .icon,
+  .vs-hero-scene .chip:hover .ico,
+  .svc-tiles .tile:hover .icon-box,
+  .vs-ftr .contact-mini li:hover .icon,
+  .vs-contact-card:hover .ico { transform: none; box-shadow: none }
+}
 
 /* Service cards: mascot peeks from the top-right corner, and leans in on hover */
 .vs-svc-card { position: relative; overflow: hidden }
