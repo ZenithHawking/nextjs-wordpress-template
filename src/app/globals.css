@@ -1418,6 +1418,21 @@
   box-shadow: 0 8px 20px -8px rgba(27,31,58,.32);
 }
 
+/* The star wordmark in the header and footer, and the tiny sparkle by the
+   Made in Vietnam line. Hovering the whole brand row is the target, so the
+   36px logo is not the only thing that reacts. */
+.vs-hdr .brand img,
+.vs-ftr .brand-row img,
+.vs-ftr .made > svg {
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.vs-hdr .brand:hover img,
+.vs-hdr .brand:focus-visible img,
+.vs-ftr .brand-row:hover img,
+.vs-ftr .made:hover > svg {
+  animation: vs-icon-wiggle .5s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+
 /* Cards that already carry a hover transform must not fight this one */
 .vs-service-card, .vs-reason, .vs-contact-info .info-row, .social-link, .svc-tiles .tile {
   transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s, border-color .3s;
@@ -1435,7 +1450,11 @@
   .vs-hero-scene .chip:hover .ico > svg,
   .svc-tiles .tile:hover .icon-box > svg,
   .vs-ftr .contact-mini li:hover .icon > svg,
-  .vs-contact-card:hover .ico > svg { animation: none }
+  .vs-contact-card:hover .ico > svg,
+  .vs-hdr .brand:hover img,
+  .vs-hdr .brand:focus-visible img,
+  .vs-ftr .brand-row:hover img,
+  .vs-ftr .made:hover > svg { animation: none }
 
   .vs-svc-card:hover .icon-box,
   .vs-service-card:hover .icon-box,
