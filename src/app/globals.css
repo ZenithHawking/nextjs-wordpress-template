@@ -1510,16 +1510,28 @@
   .vs-contact-card:hover .ico { transform: none; box-shadow: none }
 }
 
-/* Service cards: mascot peeks from the top-right corner, and leans in on hover */
+/* Service cards: mascot peeks from the bottom-right corner.
+   Not the top-right — the "Phổ biến nhất" badge lives there and the two
+   collided. Down here it sits in dead space beside the "Xem chi tiết" link,
+   and the card's overflow:hidden crops the overhang into a peek. */
 .vs-svc-card { position: relative; overflow: hidden }
 .vs-svc-card .svc-mascot {
-  position: absolute; top: 14px; right: 14px;
-  opacity: .9;
+  position: absolute; right: -10px; bottom: -12px;
+  opacity: .85;
   pointer-events: none;
   transition: transform .4s cubic-bezier(.34,1.56,.64,1), opacity .3s;
 }
-.vs-svc-card:hover .svc-mascot { opacity: 1 }
+.vs-svc-card:hover .svc-mascot {
+  opacity: 1;
+  transform: translateY(-8px) rotate(-4deg);
+}
+.vs-svc-card.tilt-right:hover .svc-mascot { transform: translateY(-8px) rotate(4deg) }
 .vs-svc-card .svc-mascot img { transition: transform .4s cubic-bezier(.34,1.56,.64,1) }
+
+@media (prefers-reduced-motion: reduce) {
+  .vs-svc-card:hover .svc-mascot,
+  .vs-svc-card.tilt-right:hover .svc-mascot { transform: none }
+}
 
 /* Sidebar CTA on articles */
 .vs-post-detail .sidebar-cta { position: relative; overflow: hidden }
@@ -1536,7 +1548,7 @@
 .vs-contact-success p { margin: 0; color: var(--vs-ink-2); max-width: 38ch; line-height: 1.6 }
 
 @media (max-width: 520px) {
-  .vs-svc-card .svc-mascot { top: 10px; right: 10px }
+  .vs-svc-card .svc-mascot { right: -8px; bottom: -10px }
   .vs-svc-card .svc-mascot img { height: 62px }
 }
 
