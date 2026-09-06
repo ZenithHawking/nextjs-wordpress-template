@@ -14,7 +14,6 @@ export const metadata = {
         title: 'Dịch vụ của Vạn Sao — Website, Sự kiện & Dữ liệu',
         description: 'Giải pháp thiết kế website, sự kiện tiệc cưới và chuyển dữ liệu chuyên nghiệp.',
         url: 'https://vansao.com/dich-vu',
-        images: [{ url: '/og-image.png', width: 1200, height: 630 }],
     },
 }
 

@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ChevronLeft, ChevronRight, Search, Sparkles, X } from 'lucide-react'
+import Mascot, { MASCOTS } from '@/components/Mascot'
 
 const PER_PAGE = 9
 
@@ -137,7 +138,13 @@ export default function BlogClient({ posts, categories }) {
                     {/* Posts grid */}
                     {paginated.length === 0 ? (
                         <div className="vs-blog-empty">
-                            <Sparkles size={40} />
+                            {/* Searching and browsing an empty category are different
+                                situations, so they get different mascots. */}
+                            {search.trim() ? (
+                                <Mascot name={MASCOTS.timKiem} size={130} motion="search" alt="" />
+                            ) : (
+                                <Mascot name={MASCOTS.ngu} size={130} motion="float" alt="" />
+                            )}
                             <p>
                                 {search.trim()
                                     ? `Không tìm thấy bài viết nào cho "${search.trim()}".`

@@ -6,7 +6,6 @@ export const metadata = {
         title: 'Liên hệ Vạn Sao — Tư vấn miễn phí',
         description: 'Liên hệ Vạn Sao để được tư vấn miễn phí. Hotline: 08 666 31679.',
         url: 'https://vansao.com/lien-he',
-        images: [{ url: '/og-image.png', width: 1200, height: 630 }],
     },
 }
 

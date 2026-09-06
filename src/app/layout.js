@@ -45,18 +45,14 @@ export const metadata = {
         siteName: 'Vạn Sao',
         title: SITE_TITLE,
         description: SITE_DESC,
-        images: [{
-            url: '/og-image.png',
-            width: 1200,
-            height: 630,
-            alt: 'Vạn Sao',
-        }],
+        // Image intentionally omitted: opengraph-image.jsx generates it and
+        // Next.js fills the tag from that route. The old '/og-image.png' this
+        // pointed at does not exist.
     },
     twitter: {
         card: 'summary_large_image',
         title: SITE_TITLE,
         description: SITE_DESC,
-        images: ['/og-image.png'],
     },
     robots: {
         index: true,

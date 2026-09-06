@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Send, Phone, Mail, MapPin, Sparkles, ArrowRight } from 'lucide-react'
+import Mascot, { MASCOTS } from '@/components/Mascot'
 
 export default function ContactSection() {
     const [form, setForm] = useState({ name: '', phone: '', message: '' })
@@ -171,8 +172,10 @@ export default function ContactSection() {
                         </div>
 
                         {status === 'success' && (
-                            <div className="status success">
-                                ✓ Cảm ơn bạn! Vạn Sao sẽ liên hệ trong vòng 24 giờ.
+                            <div className="vs-contact-success">
+                                <Mascot name={MASCOTS.haoHung} size={120} motion="pop" alt="" />
+                                <h3>Đã nhận được yêu cầu của bạn</h3>
+                                <p>Vạn Sao sẽ liên hệ lại trong vòng 24 giờ. Cần gấp hơn thì nhắn Zalo 08 666 31679.</p>
                             </div>
                         )}
                         {status === 'error' && (

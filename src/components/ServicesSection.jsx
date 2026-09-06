@@ -3,11 +3,13 @@
 import Link from 'next/link'
 import { Monitor, CalendarHeart, DatabaseZap, ArrowUpRight, Star, Check } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import Mascot, { MASCOTS } from '@/components/Mascot'
 
 const services = [
     {
         icon: Monitor,
         title: 'Thiết kế Website',
+        mascot: MASCOTS.totNghiep,
         description: 'Website đẹp – chuẩn SEO – dễ quản lý, phù hợp cho cá nhân, cửa hàng và doanh nghiệp Việt.',
         href: '/dich-vu/dich-vu-thiet-ke-website',
         variant: 'purple',
@@ -22,6 +24,7 @@ const services = [
     {
         icon: CalendarHeart,
         title: 'Sự kiện & Tiệc cưới',
+        mascot: MASCOTS.anMung,
         description: 'Check-in công nghệ, tìm ảnh nhanh bằng AI và vận hành sự kiện – tiệc cưới hiệu quả, đúng ngân sách.',
         href: '/dich-vu/dich-vu-su-kien-tiec-cuoi',
         variant: 'yellow',
@@ -36,6 +39,7 @@ const services = [
     {
         icon: DatabaseZap,
         title: 'Chuyển dữ liệu Web',
+        mascot: MASCOTS.phuThuy,
         description: 'Chuyển bài viết, sản phẩm, ảnh và khách hàng giữa các nền tảng — WordPress, Shopify, Sapo, Haravan...',
         href: '/dich-vu/dich-vu-chuyen-du-lieu',
         variant: 'mint',
@@ -95,7 +99,7 @@ export default function ServicesSection() {
                         return (
                             <article
                                 key={service.href}
-                                className={`vs-svc-card ${service.variant}`}
+                                className={`vs-svc-card mascot-host ${service.variant} ${i === 1 ? 'tilt-right' : ''}`}
                                 style={{
                                     opacity: cardsInView ? 1 : 0,
                                     transform: cardsInView ? 'translateY(0)' : 'translateY(40px)',
@@ -113,6 +117,13 @@ export default function ServicesSection() {
                                 <div className="icon-box">
                                     <Icon size={28} strokeWidth={1.7} />
                                 </div>
+
+                                <Mascot
+                                    name={service.mascot}
+                                    size={86}
+                                    motion="none"
+                                    className="svc-mascot"
+                                />
 
                                 <h3>{service.title}</h3>
                                 <p>{service.description}</p>

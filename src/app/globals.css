@@ -1195,6 +1195,154 @@
 }
 .vs-prose img { border-radius: 12px; }
 
+/* ── Mascot ─────────────────────────────────────────────────────────────
+   Sized by height; width follows the artwork, which is trimmed per figure. */
+.vs-mascot {
+  display: inline-flex;
+  line-height: 0;
+  user-select: none;
+}
+.vs-mascot img {
+  height: var(--mascot-size);
+  width: auto;
+  object-fit: contain;
+}
+
+/* Idle motions */
+@keyframes vs-mascot-float {
+  0%, 100% { transform: translateY(0) }
+  50%      { transform: translateY(-9px) }
+}
+@keyframes vs-mascot-bob {
+  0%, 100% { transform: translateY(0) rotate(-3deg) }
+  50%      { transform: translateY(-6px) rotate(3deg) }
+}
+@keyframes vs-mascot-breathe {
+  0%, 100% { transform: scale(1) }
+  50%      { transform: scale(1.05) }
+}
+@keyframes vs-mascot-spin-search {
+  0%, 100% { transform: rotate(-8deg) translateY(0) }
+  50%      { transform: rotate(8deg) translateY(-5px) }
+}
+@keyframes vs-mascot-pop {
+  0%   { transform: scale(.6) translateY(14px); opacity: 0 }
+  60%  { transform: scale(1.08) translateY(-4px); opacity: 1 }
+  100% { transform: scale(1) translateY(0); opacity: 1 }
+}
+
+.vs-mascot-float   img { animation: vs-mascot-float 3.4s ease-in-out infinite }
+.vs-mascot-bob     img { animation: vs-mascot-bob 2.8s ease-in-out infinite }
+.vs-mascot-breathe img { animation: vs-mascot-breathe 3s ease-in-out infinite }
+.vs-mascot-search  img { animation: vs-mascot-spin-search 2.4s ease-in-out infinite }
+.vs-mascot-pop     img { animation: vs-mascot-pop .55s cubic-bezier(.34,1.56,.64,1) both }
+.vs-mascot-none    img { animation: none }
+
+/* Loading spinner ring behind the star */
+.vs-mascot-loading { position: relative }
+.vs-mascot-loading::after {
+  content: '';
+  position: absolute; inset: -14%;
+  border-radius: 50%;
+  border: 3px solid var(--vs-purple-tint);
+  border-top-color: var(--vs-purple);
+  animation: vs-spin 1s linear infinite;
+}
+@keyframes vs-spin { to { transform: rotate(360deg) } }
+
+/* Hover: any .mascot-host wakes its mascot up */
+.mascot-host .vs-mascot img {
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+}
+.mascot-host:hover .vs-mascot img,
+.mascot-host:focus-visible .vs-mascot img {
+  animation-play-state: paused;
+  transform: translateY(-10px) scale(1.1) rotate(-5deg);
+}
+/* Cards that flip the star the other way, so a row does not move in lockstep */
+.mascot-host.tilt-right:hover .vs-mascot img {
+  transform: translateY(-10px) scale(1.1) rotate(5deg);
+}
+
+/* Standalone hover (mascot itself is the target) */
+.vs-mascot-hover img { transition: transform .35s cubic-bezier(.34,1.56,.64,1) }
+.vs-mascot-hover:hover img { transform: scale(1.12) rotate(-6deg) }
+
+@media (prefers-reduced-motion: reduce) {
+  .vs-mascot img { animation: none !important; transition: none !important }
+  .vs-mascot-loading::after { animation: none }
+  .mascot-host:hover .vs-mascot img,
+  .mascot-host:focus-visible .vs-mascot img,
+  .vs-mascot-hover:hover img { transform: none }
+}
+
+/* ── Trạng thái toàn trang: 404, lỗi, đang tải ──────────────────────── */
+.vs-state {
+  min-height: 72vh;
+  display: grid;
+  place-items: center;
+  padding: 72px 24px 96px;
+  text-align: center;
+}
+.vs-state .inner {
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  max-width: 560px;
+}
+.vs-state .code {
+  font-size: 12px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--vs-purple);
+  margin: 0;
+}
+.vs-state h1 {
+  margin: 0; font-size: clamp(1.55rem, 4vw, 2.1rem);
+  line-height: 1.22; color: var(--vs-ink-1); text-wrap: balance;
+}
+.vs-state p.desc {
+  margin: 0; color: var(--vs-ink-2); font-size: 1.02rem; line-height: 1.65;
+  max-width: 46ch;
+}
+.vs-state .actions {
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 4px;
+}
+.vs-state .help {
+  margin: 10px 0 0; font-size: .9rem; color: var(--vs-ink-3);
+}
+.vs-state .help a { color: var(--vs-purple); font-weight: 600; text-decoration: none }
+.vs-state .help a:hover { text-decoration: underline }
+
+/* Blog empty state uses the mascot instead of a generic icon */
+.vs-blog-empty .vs-mascot { margin-bottom: 4px }
+
+/* Service cards: mascot peeks from the top-right corner, and leans in on hover */
+.vs-svc-card { position: relative; overflow: hidden }
+.vs-svc-card .svc-mascot {
+  position: absolute; top: 14px; right: 14px;
+  opacity: .9;
+  pointer-events: none;
+  transition: transform .4s cubic-bezier(.34,1.56,.64,1), opacity .3s;
+}
+.vs-svc-card:hover .svc-mascot { opacity: 1 }
+.vs-svc-card .svc-mascot img { transition: transform .4s cubic-bezier(.34,1.56,.64,1) }
+
+/* Sidebar CTA on articles */
+.vs-post-detail .sidebar-cta { position: relative; overflow: hidden }
+.vs-post-detail .sidebar-cta .cta-mascot {
+  position: absolute; right: -8px; bottom: -6px; opacity: .95; pointer-events: none;
+}
+
+/* Contact form success state */
+.vs-contact-success {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  text-align: center; padding: 28px 8px;
+}
+.vs-contact-success h3 { margin: 0; color: var(--vs-ink-1); font-size: 1.2rem }
+.vs-contact-success p { margin: 0; color: var(--vs-ink-2); max-width: 38ch; line-height: 1.6 }
+
+@media (max-width: 520px) {
+  .vs-svc-card .svc-mascot { top: 10px; right: 10px }
+  .vs-svc-card .svc-mascot img { height: 62px }
+}
+
 /* Related-reads block on service detail pages */
 .vs-svc-detail-reads { padding: 72px 0; background: var(--vs-bg-2); }
 .vs-svc-detail-reads .reads-grid {

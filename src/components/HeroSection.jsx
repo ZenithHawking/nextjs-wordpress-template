@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, ArrowUpRight, Monitor, CalendarHeart, DatabaseZap } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import Mascot, { MASCOTS } from '@/components/Mascot'
 
 export default function HeroSection() {
     const [mounted, setMounted] = useState(false)
@@ -75,16 +76,9 @@ export default function HeroSection() {
                         <div className="ring ring-2" />
                         <div className="ring ring-1" />
 
-                        {/* Big star — your /public/logo.png */}
-                        <div className="big-star">
-                            <Image
-                                src="/logo.png"
-                                alt=""
-                                width={220}
-                                height={220}
-                                className="object-contain drop-shadow-2xl"
-                                priority
-                            />
+                        {/* Big star — the mascot, not the flat logo */}
+                        <div className="big-star mascot-host">
+                            <Mascot name={MASCOTS.nhayMat} size={230} motion="float" priority />
                         </div>
 
                         <div className="orbit orbit-a">

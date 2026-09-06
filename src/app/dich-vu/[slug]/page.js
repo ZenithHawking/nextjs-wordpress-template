@@ -58,7 +58,6 @@ export async function generateMetadata({ params }) {
             title: service.title,
             description: (service.excerpt ?? '').replace(/<[^>]*>/g, '').trim().slice(0, 160),
             url: `https://vansao.com/dich-vu/${slug}`,
-            images: [{ url: '/og-image.png', width: 1200, height: 630 }],
         },
     }
 }

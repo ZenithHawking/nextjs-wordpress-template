@@ -8,7 +8,6 @@ export const metadata = {
         title: 'Liên hệ Vạn Sao — Tư vấn miễn phí',
         description: 'Gửi yêu cầu tư vấn miễn phí. Vạn Sao phản hồi trong 24 giờ — không ràng buộc, không chi phí ẩn.',
         url: 'https://vansao.com/lien-he',
-        images: [{ url: '/og-image.png', width: 1200, height: 630 }],
     },
 }
 

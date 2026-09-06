@@ -12,6 +12,7 @@ import {
     breadcrumbSchema,
     demoteContentH1,
 } from '@/lib/seo'
+import Mascot, { MASCOTS } from '@/components/Mascot'
 
 export async function generateMetadata({ params }) {
     const { slug } = await params
@@ -163,11 +164,17 @@ export default async function BlogPostPage({ params }) {
                             <aside className="sidebar-col">
 
                                 {/* CTA */}
-                                <div className="sidebar-cta">
+                                <div className="sidebar-cta mascot-host">
                                     <p className="eyebrow">Vạn Sao</p>
                                     <h3>Cần tư vấn về dịch vụ?</h3>
                                     <p className="desc">Đội ngũ Vạn Sao sẵn sàng hỗ trợ miễn phí, không ràng buộc.</p>
                                     <Link href="/lien-he" className="btn">Liên hệ ngay</Link>
+                                    <Mascot
+                                        name={MASCOTS.yeuThich}
+                                        size={92}
+                                        motion="none"
+                                        className="cta-mascot"
+                                    />
                                 </div>
 
                                 {/* Related */}

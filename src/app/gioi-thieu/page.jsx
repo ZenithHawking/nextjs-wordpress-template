@@ -33,7 +33,6 @@ export const metadata = {
         title: 'Về Vạn Sao — Đơn vị công nghệ sáng tạo',
         description: 'Vạn Sao là đơn vị công nghệ chuyên thiết kế website, tổ chức sự kiện và chuyển dữ liệu web tại TP. Hồ Chí Minh.',
         url: 'https://vansao.com/gioi-thieu',
-        images: [{ url: '/og-image.png', width: 1200, height: 630 }],
     },
 }
 
