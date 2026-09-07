@@ -1,0 +1,24 @@
+{
+  "title": "Thiết Kế Web Long An – Làm Website Trọn Gói, Giá Từ 1 Triệu",
+  "slug": "thiet-ke-web-long-an",
+  "excerpt": "Thiết kế web ở Long An (nay thuộc tỉnh Tây Ninh): làm website trọn gói từ 1 triệu, bàn giao 5–10 ngày, chuẩn SEO, bảo hành 2 năm. Vạn Sao ở ngay địa phương.",
+  "status": "publish",
+  "category_id": 2,
+  "content_file": "thiet-ke-web-long-an.html",
+  "_notes": {
+    "post_id": "43 — viết đè lên bài cũ, giữ nguyên slug và ảnh bìa đang có",
+    "featured_image": "Cố ý bỏ trống trong file này. publish-post.mjs chỉ gửi featured_image khi có khoá đó, nên ảnh bìa hiện tại của bài 43 được giữ nguyên.",
+    "primary_keywords": [
+      "thiết kế web ở Long An",
+      "làm website ở Long An"
+    ],
+    "secondary_keywords": [
+      "thiết kế website Long An",
+      "giá làm website Long An",
+      "thiết kế web Bến Lức",
+      "thiết kế web Tân An",
+      "Long An thuộc tỉnh nào"
+    ],
+    "khong_tao_bai_moi": "Hai từ khoá chính cùng một ý định tìm kiếm. Tách thành hai bài sẽ tự cạnh tranh nhau và cả hai cùng tụt, nên gộp vào một trang duy nhất."
+  }
+}

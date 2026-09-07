@@ -11,6 +11,7 @@ import {
     faqSchema,
     breadcrumbSchema,
     demoteContentH1,
+    optimizeContentImages,
 } from '@/lib/seo'
 import Mascot, { MASCOTS } from '@/components/Mascot'
 
@@ -68,6 +69,12 @@ export default async function BlogPostPage({ params }) {
     const categoryName = post.categories?.[0]?.categories_id?.name ?? null
 
     const pageUrl = `${SITE_URL}/blog/${slug}`
+
+    // One pass over the body: exactly one h1 per page, and images that load
+    // lazily at a sane size instead of full-resolution and all at once.
+    const articleHtml = optimizeContentImages(demoteContentH1(post.content), {
+        directusUrl: process.env.DIRECTUS_URL ?? '',
+    })
 
     const jsonLd = {
         '@context': 'https://schema.org',
@@ -135,7 +142,7 @@ export default async function BlogPostPage({ params }) {
                             <div className="article-col">
                                 <article
                                     className="vs-prose prose prose-lg max-w-none"
-                                    dangerouslySetInnerHTML={{ __html: demoteContentH1(post.content) }}
+                                    dangerouslySetInnerHTML={{ __html: articleHtml }}
                                 />
 
                                 {/* Share */}

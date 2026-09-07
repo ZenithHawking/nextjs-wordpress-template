@@ -184,6 +184,53 @@ export function demoteContentH1(html) {
         .replace(/<\/h1>/gi, '</h2>')
 }
 
+/**
+ * Make the images inside post HTML cheap to load.
+ *
+ * Cover images go through next/image, but article body images are injected via
+ * dangerouslySetInnerHTML and reach the browser exactly as written — full size,
+ * eagerly, all at once. On a post with several photos that is the slowest thing
+ * on the page, and load speed is a ranking signal.
+ *
+ * Two things happen here:
+ *
+ * - Images served by Directus get transform parameters, so a 419KB PNG comes
+ *   down as a 32KB WebP. Directus generates and caches the derivative; the
+ *   original is untouched.
+ * - Every image gets lazy loading and async decoding, so photos further down
+ *   the article stop competing with the text for bandwidth.
+ *
+ * Images already carrying their own query string are left alone — those are
+ * hotlinked from elsewhere and already sized by that host.
+ */
+export function optimizeContentImages(html, { directusUrl = '', maxWidth = 1200, quality = 80 } = {}) {
+    if (!html) return ''
+
+    return html.replace(/<img\b[^>]*>/gi, (tag) => {
+        let out = tag
+
+        if (directusUrl) {
+            out = out.replace(
+                /src="([^"]*\/assets\/[^"?]+)"/i,
+                (_, url) => `src="${url}?width=${maxWidth}&format=webp&quality=${quality}"`,
+            )
+        }
+
+        if (!/\bloading=/i.test(out)) out = out.replace(/<img\b/i, '<img loading="lazy"')
+        if (!/\bdecoding=/i.test(out)) out = out.replace(/<img\b/i, '<img decoding="async"')
+
+        return out
+    })
+}
+
+/** Body images with no alt text — reported so they can be fixed, never invented. */
+export function imagesMissingAlt(html) {
+    if (!html) return 0
+    return [...html.matchAll(/<img\b[^>]*>/gi)]
+        .filter(([tag]) => !/\balt="[^"]+"/i.test(tag))
+        .length
+}
+
 export function faqSchema(items, pageUrl) {
     if (!items.length) return null
     return {
