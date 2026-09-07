@@ -1,0 +1,22 @@
+{
+  "title": "Thiết Kế Website Tân An – Giá Từ 1 Triệu, Chuẩn SEO",
+  "slug": "thiet-ke-website-tan-an",
+  "excerpt": "Thiết kế website tại Tân An (nay là phường Tân An, tỉnh Tây Ninh): giá từ 1 triệu, có đặt lịch trực tuyến cho phòng khám, spa, trung tâm dạy học.",
+  "status": "publish",
+  "category_id": 2,
+  "content_file": "thiet-ke-website-tan-an.html",
+  "_notes": {
+    "chua_dang": "Viet san, chua tao ban ghi tren Directus. Dang bang: node scripts/publish-post.mjs thiet-ke-website-tan-an --publish",
+    "primary_keywords": [
+      "thiết kế website Tân An",
+      "làm website Tân An"
+    ],
+    "secondary_keywords": [
+      "Tân An giờ là phường hay thành phố",
+      "website phòng khám Tân An",
+      "website đặt lịch trực tuyến"
+    ],
+    "khong_trung_autopost": "Goc dich vu (phong kham, spa, trung tam day hoc), khac han goc cong nghiep cua cac bai dia ban khac.",
+    "featured_image": "Chua co. Them anh bia trong Directus sau khi dang."
+  }
+}

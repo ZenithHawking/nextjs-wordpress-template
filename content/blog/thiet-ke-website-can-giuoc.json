@@ -1,0 +1,22 @@
+{
+  "title": "Thiết Kế Website Cần Giuộc – Giá Từ 1 Triệu, Chuẩn SEO",
+  "slug": "thiet-ke-website-can-giuoc",
+  "excerpt": "Thiết kế website tại Cần Giuộc (nay thuộc tỉnh Tây Ninh): giá từ 1 triệu, bàn giao 5–10 ngày, hỗ trợ song ngữ cho doanh nghiệp quanh KCN Long Hậu.",
+  "status": "publish",
+  "category_id": 2,
+  "content_file": "thiet-ke-website-can-giuoc.html",
+  "_notes": {
+    "chua_dang": "Viet san, chua tao ban ghi tren Directus. Dang bang: node scripts/publish-post.mjs thiet-ke-website-can-giuoc --publish",
+    "primary_keywords": [
+      "thiết kế website Cần Giuộc",
+      "làm website Cần Giuộc"
+    ],
+    "secondary_keywords": [
+      "website KCN Long Hậu",
+      "thiết kế web logistics Cần Giuộc",
+      "Cần Giuộc thuộc tỉnh nào"
+    ],
+    "khong_trung_autopost": "Autopost khong co Can Giuoc trong vong xoay dia ban (chi co Hau Nghia, Ben Luc, Cu Chi, KCN Duc Hoa).",
+    "featured_image": "Chua co. Them anh bia trong Directus sau khi dang."
+  }
+}

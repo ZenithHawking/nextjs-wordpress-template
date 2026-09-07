@@ -1,0 +1,22 @@
+{
+  "title": "Google Business Profile: Hướng Dẫn Lên Top Bản Đồ",
+  "slug": "google-business-profile-doanh-nghiep",
+  "excerpt": "Hướng dẫn tạo và tối ưu Google Business Profile cho doanh nghiệp địa phương: xác minh, đồng bộ NAP, xin đánh giá và 5 lỗi khiến hồ sơ không lên được.",
+  "status": "publish",
+  "category_id": 1,
+  "content_file": "google-business-profile-doanh-nghiep.html",
+  "_notes": {
+    "chua_dang": "Viet san, chua tao ban ghi tren Directus. Dang bang: node scripts/publish-post.mjs google-business-profile-doanh-nghiep --publish",
+    "primary_keywords": [
+      "Google Business Profile",
+      "đăng ký Google Maps cho doanh nghiệp"
+    ],
+    "secondary_keywords": [
+      "cách lên top Google Maps",
+      "tối ưu hồ sơ doanh nghiệp Google",
+      "xin đánh giá Google"
+    ],
+    "khong_trung_autopost": "Bai thong tin, khong trung chu de nao cua autopost. Ho tro truc tiep viec ban dang khuyen khach lam.",
+    "featured_image": "Chua co. Them anh bia trong Directus sau khi dang."
+  }
+}
