@@ -48,6 +48,8 @@ function parseContent(html) {
 
 export async function generateMetadata({ params }) {
     const { slug } = await params
+    // Same reason as the blog route: 404 before the response is committed.
+    if (!allowedSlugs.includes(slug)) notFound()
     const service = await getServiceBySlug(slug)
     if (!service) return {}
     return {

@@ -18,7 +18,10 @@ import Mascot, { MASCOTS } from '@/components/Mascot'
 export async function generateMetadata({ params }) {
     const { slug } = await params
     const post = await getPostBySlug(slug)
-    if (!post) return {}
+    // 404 from here as well as the component. generateMetadata runs before the
+    // response is committed, so an unknown slug gets a real 404 status rather
+    // than the 404 page served under a 200 — which Google files as a soft 404.
+    if (!post) notFound()
     const title = post.title ?? ''
     const description = cleanDescription(post.excerpt, post.content)
     const thumbnail = post.featured_image ?? null
