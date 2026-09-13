@@ -4,6 +4,7 @@ import { Monitor, CalendarHeart, DatabaseZap, ArrowRight, ArrowUpRight, Star } f
 import BatRadarCard from '@/components/BatRadarCard'
 import QRCard from '@/components/QRCard'
 import UniAPICard from '@/components/UniAPICard'
+import TaiVideoCard from '@/components/TaiVideoCard'
 import WebSamplesCard from '@/components/WebSamplesCard'
 
 export const metadata = {
@@ -149,6 +150,7 @@ export default function ServicesPage() {
                         <QRCard />
                         <BatRadarCard />
                         <UniAPICard />
+                        <TaiVideoCard />
                     </div>
                 </div>
             </section>

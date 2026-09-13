@@ -1892,6 +1892,25 @@
 .vs-uniapi-card .cta { color: #15803D; }
 .vs-uniapi-card .tag { color: var(--vs-ink-4); opacity: 1; }
 
+/* Tải video Card — warm brown bg */
+.vs-taivideo-card {
+  background: #FAF3EC; color: var(--vs-ink-1);
+}
+.vs-taivideo-card .glow {
+  background: radial-gradient(closest-side, rgba(139,94,60,0.13), transparent);
+}
+.vs-taivideo-card .badge {
+  background: #8B5E3C; color: #fff;
+}
+.vs-taivideo-card .icon-box {
+  background: #EFE0D0; color: #8B5E3C;
+}
+.vs-taivideo-card .title .dot { color: #8B5E3C; }
+.vs-taivideo-card .desc { color: var(--vs-ink-3); opacity: 1; }
+.vs-taivideo-card .cta-row { border-top-color: #EFE0D0; }
+.vs-taivideo-card .cta { color: #8B5E3C; }
+.vs-taivideo-card .tag { color: var(--vs-ink-4); opacity: 1; }
+
 /* CTA — reuse about-cta style */
 .vs-services-cta { padding: 96px 0; background: var(--vs-bg); }
 .vs-services-cta .card {
